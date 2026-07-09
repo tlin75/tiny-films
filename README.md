@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# TinyFilms Photobooth
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A browser-based photobooth app where user can pick a film-strip frame, capture or upload photos, then decorate their strip with stickers. Everything is composited live on an HTML5 canvas so you get a downloadable, shareable film strip.
 
-## Available Scripts
+![TinyFilms Photobooth banner](public/assets/logo/tinyfilms-logo.png)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- Live webcam capture with a 3-second countdown, or upload your own photos
+- Frame selection: Choose from a variety of pastel/aesthetic film-strip frames
+- Drag-and-drop editing: position photos within their slots after capture
+- Sticker decoration mode: add, drag, select and delete stickers on your strip
+- Keyboard support: delete a selected sticker using `Backspace`/`Delete` keys
+- Redo: remove the last photo and recapture if you're not happy with it
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React, HTML, CSS
 
-### `npm test`
+## 📁 Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+├── components/
+│   └── Photobooth/
+│       ├── Photobooth.js 
+│       ├── Header.js          
+│       ├── FrameSelector/
+│       ├── PhotoCapture/   
+│       ├── PhotoCanvas/ 
+│       └── StickerPicker/ 
+├── data/
+│   ├── frameOptions.js  
+│   └── stickerOptions.js  
+└── styles/
+    └── global.css
 
-### `npm run build`
+public/
+└── assets/
+    ├── frames/      
+    ├── stickers/    
+    └── fonts/        
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Node.js](https://nodejs.org/) (v16 or later recommended)
+- npm or yarn
 
-### `npm run eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# Clone the repo
+git clone https://github.com/tlin75/tiny-film.git
+cd tiny-film
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install dependencies
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start the development server
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Currently, the app runs at `http://localhost:3000`.
 
-## Learn More
+> **Note:** Your browser will ask for camera permission on first use — this is required for the webcam capture feature to work.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🖥️ Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Select a frame** from the carousel on the home screen.
+2. **Take or upload 4 photos** to fill the frame's photo slots
+3. Once all 4 slots are filled, you're moved into **decorate mode** where you pick stickers and drag them anywhere on your strip.
+4. Click a sticker to select it (shown with a pink outline), then press `Delete`/`Backspace` to remove it.
+5. Click download to get a png of your film strip.
+6. Use the **Back** button to return to the previous step at any time.
 
-### Code Splitting
+## 📌 Further Implementation
+- [ ] Add more filters/effects to captured photos
+- [ ] Sticker resizing via drag handles
+- [ ] Mobile responsiveness + touch support for dragging photos/stickers
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Credits
+Fonts: Nunito, Fredoka, Magnifico Daytime ITC.
+Designs: Canva, Figma.
+Icons: Canva, Freepik.
