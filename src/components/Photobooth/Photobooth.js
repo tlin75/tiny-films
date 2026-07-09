@@ -2,49 +2,13 @@
 import React, {useRef, useState, useEffect } from 'react';
 import Webcam from "react-webcam";
 import styles from "../styles/Photobooth.module.css";
-
-// import the frames and stickers 
-const frameOptions = [
-  "/assets/frames/azure-beach.png",
-  "/asset/frames/azure-frame.png",
-  "/asset/frames/black-frame.png",
-  "/asset/frames/cream-flowers.png",
-  "/asset/frames/cream-frame.png",
-  "/asset/frames/cream-simple.png",
-  "/asset/frames/cyan-frame.png",
-  "/asset/frames/cyan-underwater.png",
-  "/asset/frames/pink-cherry-blossom.png",
-  "/asset/frames/pink-frame.png",
-  "/asset/frames/purple-frame.png",
-  "/asset/frames/purple-simple.png",
-  "/asset/frames/yellow-frame.png",
-  "/asset/frames/yellow-simple.png",
-];
-
-const stickerOptions = [
-  "/assets/stickers/cat-and-chick.png",
-  "/assets/stickers/cat-battery.png",
-  "/assets/stickers/cat-cafe.png",
-  "/assets/stickers/cat-coffee-mug.png",
-  "/assets/stickers/cat.png",
-  "/assets/stickers/cats-in-box.png",
-  "/assets/stickers/coffee-bean-bag.png",
-  "/assets/stickers/cute-rabbit.png",
-  "/assets/stickers/flower.png",
-  "/assets/stickers/heart-left.png",
-  "/assets/stickers/heart-right.png",
-  "/assets/stickers/pink-macaron.png",
-  "/assets/stickers/pink-pocky.png",
-  "/assets/stickers/pretzel.png",
-  "/assets/stickers/rabbit-icecream.png",
-  "/assets/stickers/rabbit-strawberry-bread.png",
-  "/assets/stickers/rainbow.png",
-  "/assets/stickers/shooting-star.png",
-  "/assets/stickers/star.png",
-  "/assets/stickers/strawberry-cake.png",
-  "/assets/stickers/strawberry-yakult.png",
-  "/assets/stickers/strawberry.png",
-];
+import Header from "./Header";
+import FrameSelector from "./FrameSelector/FrameSelector";
+import PhotoCapture from "./PhotoCapture/PhotoCapture";
+import StickerPicker from "./StickerPicker/StickerPicker";
+import PhotoCanvas from "./PhotoCanvas/PhotoCanvas";
+import { frameOptions } from "../../data/frameOptions";
+import { stickerOptions } from "../../data/stickerOptions";
 
 const videoConstraints = {
   width: 881,
@@ -80,7 +44,6 @@ export default function PhotoBooth() {
   const [stickers, setStickers] = useState([]);
   const [draggingSticker, setDraggingSticker] = useState(null);
   const [selectedSticker, setSelectedSticker] = useState(null);
-  const row = { display: "flex", gap: 40, alignItems: "flex-start" };
 
   // useEffects 
   
@@ -88,26 +51,49 @@ export default function PhotoBooth() {
 
   return (
     <div className={styles.centreCol}>
-      {/* header with back button and text */}
-      <div className={styles.headerBar}>
-        <button className={styles.backBtn} onClick={handleBack}>
-          &larr; Back
-        </button>
-        <h1 className={styles.titleBar}>
-          {
-            !selectedFrame
-            ? "₊✩‧₊˚ Select a frame౨ৎ ˚₊✩‧₊"
-            : mode === "photo"
-                ? "⋆｡‧˚ʚ Smile :)ɞ˚‧｡⋆"
-                : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."
-          }
-        </h1>
+      <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBack} />
 
-        <div className={styles.mainContent}>
-          {/* map every frame we have created from assets */}
-          
-        </div>
+      <div className={styles.mainContent}>
+        {!selectedFrame ? (
+          <FrameSelector
+            frameOptions={frameOptions}
+            selectedFrame={selectedFrame}
+            onSelect={setSelectedFrame}
+          />
+        ) : (
+          <div className={styles.row}>
+            <div>
+              {mode === "photo" && (
+                <PhotoCapture
+                  webcamRef={webcamRef}
+                  videoConstraints={videoConstraints}
+                  countdown={countdown}
+                  canTakePhoto={canTakePhoto}
+                  photoCount={photoCount}
+                  onCapture={capturePhoto}
+                  onUpload={uploadPhoto}
+                  onRedo={redoLastPhoto}
+                />
+              )}
+              {mode === "decorate" && (
+                <StickerPicker
+                  stickerOptions={stickerOptions}
+                  onAddSticker={addSticker}
+                />
+              )}
+            </div>
+
+            <PhotoCanvas
+              canvasRef={canvasRef}
+              mode={mode}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onDownload={downloadPhoto}
+            />
+          </div>
+        )}
       </div>
     </div>
-  )
+  );
 }
