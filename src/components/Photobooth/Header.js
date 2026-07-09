@@ -15,9 +15,9 @@ export default function Header({ selectedFrame, mode, onBack }) {
 
       <h1 className={styles.titleBar}>
         {!selectedFrame
-          ? "₊✩‧₊˚ Select a frame౨ৎ ˚₊✩‧₊"
+          ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
           : mode === "photo"
-          ? "⋆｡‧˚ʚ Smile :)ɞ˚‧｡⋆"
+          ? "⋆｡‧˚ʚ Smile :) ɞ˚‧｡⋆"
           : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."}
       </h1>
     </div>

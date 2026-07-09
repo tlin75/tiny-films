@@ -19,7 +19,7 @@ const videoConstraints = {
 const SLOT_WIDTH = 881;
 const SLOT_HEIGHT = 493;
 
-export default function PhotoBooth() {
+function PhotoBooth() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const frameImgRef = useRef(null);
@@ -186,8 +186,79 @@ export default function PhotoBooth() {
     setCanTakePhoto(true);
   };
 
-  // Functions for draggable/moveable photos 
+  // Function for getting coordinates of mouse when it has been clicked or dragged
+  const getCoords = (e) => {
+    // convert screen pixel to canvas pixels
+    const r = canvasRef.current.getBoundingClientRect();
+    return {
+      x: (e.clientX - r.left) * (canvasRef.current.width / r.width),
+      y: (e.clientY - r.top) * (canvasRef.current.height / r.height),
+    };
+  };
 
+  // Functions for draggable/moveable photos 
+  const handleMouseDown = (e) => {
+    const { x, y } = getCoords(e);
+
+    if (mode === "photo") {
+      // Go through every photo
+      for (let i = photos.length - 1; i >= 0; i--) {
+        // get the photo data and positions 
+        const p = photos[i];
+        const slot = slots[p.slotIndex];
+        const w = p.img.width * p.scale;
+        const h = p.img.height * p.scale;
+
+        // check if it is the photo that was clicked 
+        if (
+          x >= slot.x + p.offsetX &&
+          x <= slot.x + p.offsetX + w &&
+          y >= slot.y + p.offsetY &&
+          y <= slot.y + p.offsetY + h
+        ) {
+          // set dragging photo to current photo 
+          setDraggingPhoto(i);
+          setDragOffset({
+            x: x - slot.x - p.offsetX,
+            y: y - slot.y - p.offsetY,
+          });
+          return;
+        }
+      }
+    }
+
+    
+  };
+
+  // Handle the user's dragging movement that repositions photo/sticker
+  const handleMouseMove = (e) => {
+    const { x, y } = getCoords(e);
+    
+    // Update the photo data when in photo mode 
+    if (draggingPhoto !== null && mode === "photo") {
+      setPhotos((prev) => {
+        const updated = [...prev];
+        const p = updated[draggingPhoto];
+        const slot = slots[p.slotIndex];
+        const w = p.img.width * p.scale;
+        const h = p.img.height * p.scale;
+
+        // clamp photo to slots so they don't exceed the boundaries 
+        p.offsetX = x - slot.x - dragOffset.x;
+        p.offsetY = y - slot.y - dragOffset.y;
+        p.offsetX = Math.min(Math.max(p.offsetX, SLOT_WIDTH - w), 0);
+        p.offsetY = Math.min(Math.max(p.offsetY, SLOT_HEIGHT - h), 0);
+
+        return updated;
+      });
+    }
+
+    
+  };
+
+  const handleMouseUp = () => {
+    setDraggingPhoto(null);
+  };
 
   const handleBackBtn = () => {
     if (mode === "decorate") {
@@ -256,3 +327,5 @@ export default function PhotoBooth() {
     </div>
   );
 }
+
+export default PhotoBooth
