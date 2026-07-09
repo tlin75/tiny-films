@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "Magnifico";
+  src: url("../../public/assets/fonts/Magnifico\ Daytime\ ITC\ Std\ Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../../public/assets/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("../../public/assets/fonts/Fredoka-VariableFont_wdth\,wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Nunito", cursive, sans-serif;
+  color: #f47499;
+}

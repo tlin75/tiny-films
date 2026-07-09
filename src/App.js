@@ -1,5 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import PhotoBooth from "./components/Photobooth"
+import "./style/global.css"
+const logoSrc = "/assest/logo/tinyfilms-logo.png";
 
 function App() {
   return (
