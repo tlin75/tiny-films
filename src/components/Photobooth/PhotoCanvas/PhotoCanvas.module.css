@@ -1,0 +1,12 @@
+.canvas {
+  width: 200px;
+  height: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.downloadWrap {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}

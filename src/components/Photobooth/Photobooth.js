@@ -305,21 +305,22 @@ function PhotoBooth() {
                   onRedo={redoLastPhoto}
                 />
               )}
-              {mode === "decorate" && (
+              {/* {mode === "decorate" && (
                 <StickerPicker
                   stickerOptions={stickerOptions}
                   onAddSticker={addSticker}
                 />
-              )}
+              )} */}
             </div>
-
+            
+            {/* Display frame using canvas */}
             <PhotoCanvas
               canvasRef={canvasRef}
               mode={mode}
+              // mouse movement functionality
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              onDownload={downloadPhoto}
             />
           </div>
         )}

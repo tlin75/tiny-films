@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import btnStyles from "./Buttons.module.css";
+import btnStyles from "../Buttons.module.css";
 import styles from "./PhotoCapture.module.css";
 
 function PhotoCapture({

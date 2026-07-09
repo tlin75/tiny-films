@@ -13,21 +13,30 @@
   gap: 20px;
 }
 
-.headerBar {
-  width: 700px;
-  height: 60px;
-  position: relative;
-  margin-bottom: 20px;
-  display: flex;
+.headerAll {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .backBtn {
   font-family: "Fredoka";
-  position: absolute;
-  left: 0;
-  top: 10px;
+  justify-self: start;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+}
+
+.headerBar {
+  grid-column: 2;
+  width: 45vw;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fde8f1;
 }
 
 .titleBar {

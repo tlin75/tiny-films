@@ -24,6 +24,8 @@
 }
 
 .buttonRow {
+  display: flex;
+  justify-content: space-between;
   margin-top: 16px;
   display: flex;
   gap: 12px;

@@ -3,7 +3,7 @@ import btnStyles from "./Buttons.module.css";
 
 export default function Header({ selectedFrame, mode, onBack }) {
   return (
-    <div className={styles.headerBar}>
+    <div className={styles.headerAll}> 
       {selectedFrame && (
         <button
           className={`${btnStyles.btn} ${styles.backBtn}`}
@@ -12,14 +12,16 @@ export default function Header({ selectedFrame, mode, onBack }) {
           &larr; Back
         </button>
       )}
-
-      <h1 className={styles.titleBar}>
-        {!selectedFrame
-          ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
-          : mode === "photo"
-          ? "⋆｡‧˚ʚ Smile :) ɞ˚‧｡⋆"
-          : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."}
-      </h1>
+      <div className={styles.headerBar}>
+        
+        <h1 className={styles.titleBar}>
+          {!selectedFrame
+            ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
+            : mode === "photo"
+            ? "⋆｡‧˚ʚ Smile :) ɞ˚‧｡⋆"
+            : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."}
+        </h1>
+      </div>
     </div>
   );
 }
