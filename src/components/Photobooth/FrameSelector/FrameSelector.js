@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './FrameSelector.module.css';
 
 function FrameSelector({ frameOptions, selectedFrame, onSelect }) {
