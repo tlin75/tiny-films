@@ -7,6 +7,7 @@ function PhotoCanvas({
   onMouseDown,
   onMouseMove,
   onMouseUp,
+  onDownload
 }) {
   return (
     <div>
@@ -17,6 +18,14 @@ function PhotoCanvas({
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
       />
+
+      {mode === "decorate" && (
+        <div className={styles.downloadWrap}>
+          <button className={btnStyles.btn} onClick={onDownload}>
+            Download
+          </button>
+        </div>
+      )}
     </div>
   )
 }

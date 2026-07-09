@@ -306,6 +306,7 @@ function PhotoBooth() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (
+        // user can use delete or backspace to delete sticker 
         (e.key === "Delete" || e.key === "Backspace") &&
         selectedSticker != null &&
         mode === "decorate"
@@ -338,6 +339,12 @@ function PhotoBooth() {
     }
   }
 
+  const downloadPhoto = () => {
+    const a = document.createElement("a");
+    a.href = canvasRef.current.toDataURL("image/png");
+    a.download = "tiny-films.png";
+    a.click();
+  };
 
   return (
     <div className={styles.centreCol}>
@@ -382,6 +389,7 @@ function PhotoBooth() {
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
+              onDownload={downloadPhoto}
             />
           </div>
         )}

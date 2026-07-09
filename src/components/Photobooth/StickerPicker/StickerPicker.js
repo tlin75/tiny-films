@@ -16,7 +16,7 @@ function StickerPicker({
         />
       ))}
     </div>
-  )
+  );
 }
 
 export default StickerPicker
