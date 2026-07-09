@@ -103,7 +103,90 @@ export default function PhotoBooth() {
   // when there is a photo, change in photocount we want to draw canvas 
   useEffect(drawCanvas, [photos, stickers, selectedSticker, photoCount]);
 
-  // Functions for photo 
+  // Functions to handle photos
+  const addPhoto = (img) => {
+    // if we have four photos we do not want anymore 
+    if (photoCount >= 4) return;
+
+    const scale = SLOT_WIDTH / img.width;
+    const drawH = img.height * scale;
+    // if height is too much we can centre it 
+    const offsetY = drawH > SLOT_HEIGHT ? (SLOT_HEIGHT - drawH) / 2 : 0;
+
+    // store photos data
+    setPhotos((p) => [
+      ...p,
+      { img, slotIndex: photoCount, scale, offsetX: 0, offsetY },
+    ]);
+
+    setCanTakePhoto(true);
+
+    // update photocount
+    setPhotoCount((c) => {
+      const next = c + 1;
+      // when we have enough photos can decorate it 
+      if (next === 4) setMode("decorate");
+      return next;
+    });
+  };
+
+  const takePhotoNow = () => {
+    const src = webcamRef.current.getScreenshot();
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+    img.onload = () => addPhoto(img);
+  };
+
+  // Helps with countdown of 3 secs when function is called whnenver user clicks
+  // take photo button  
+  const capturePhoto = () => {
+    if (!canTakePhoto || countdown !== null) return;
+
+    setCanTakePhoto(false);
+    setCountdown(3);
+
+    // 3 second countdown 
+    let current = 3;
+    const interval = setInterval(() => {
+      current -= 1;
+      if (current === 0) {
+        clearInterval(interval);
+        setCountdown(null);
+        takePhotoNow();
+      } else {
+        setCountdown(current);
+      }
+    }, 1000);
+  };
+
+  const uploadPhoto = (e) => {
+    // get target file that user has uploaded
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // file reader loads photo
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.src = reader.result;
+      // use add photo function to uplaod 
+      img.onload = () => addPhoto(img);
+    };
+
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
+  // remove last photo from photo array if user wants to re capture  
+  const redoLastPhoto = () => {
+    if (!photos.length) return;
+    setPhotos((p) => p.slice(0, -1));
+    setPhotoCount((c) => Math.max(0, c - 1));
+    setCanTakePhoto(true);
+  };
+
+  // Functions for draggable/moveable photos 
 
 
   const handleBackBtn = () => {
@@ -137,10 +220,38 @@ export default function PhotoBooth() {
             onSelect={setSelectedFrame}
           />
         ) : (
-          
-          ""
-        )
-        }
+          <div className={styles.row}>
+            <div>
+              {mode === "photo" && (
+                <PhotoCapture
+                  webcamRef={webcamRef}
+                  videoConstraints={videoConstraints}
+                  countdown={countdown}
+                  canTakePhoto={canTakePhoto}
+                  photoCount={photoCount}
+                  onCapture={capturePhoto}
+                  onUpload={uploadPhoto}
+                  onRedo={redoLastPhoto}
+                />
+              )}
+              {mode === "decorate" && (
+                <StickerPicker
+                  stickerOptions={stickerOptions}
+                  onAddSticker={addSticker}
+                />
+              )}
+            </div>
+
+            <PhotoCanvas
+              canvasRef={canvasRef}
+              mode={mode}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onDownload={downloadPhoto}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
