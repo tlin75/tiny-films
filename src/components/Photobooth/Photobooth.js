@@ -90,17 +90,28 @@ function PhotoBooth() {
 
     ctx.drawImage(frameImgRef.current, 0, 0, frameWidth, frameHeight);
 
+    const BOX = 250;
     stickers.forEach((s, i) => {
-      ctx.drawImage(s.img, s.x, s.y, 150, 150);
+      // scale to fit within the box while keeping aspect ratio
+      const scale = Math.min(BOX / s.img.width, BOX / s.img.height);
+      const drawW = s.img.width * scale;
+      const drawH = s.img.height * scale;
+
+      // center the scaled image within the 250x250 box
+      const offsetX = (BOX - drawW) / 2;
+      const offsetY = (BOX - drawH) / 2;
+
+      ctx.drawImage(s.img, s.x + offsetX, s.y + offsetY, drawW, drawH);
+
       if (i === selectedSticker) {
         ctx.strokeStyle = "#ff7aa2";
         ctx.lineWidth = 4;
-        ctx.strokeRect(s.x, s.y, 150, 150);
+        ctx.strokeRect(s.x, s.y, BOX, BOX);
       }
     });
   };
 
-  // when there is a photo, change in photocount we want to draw canvas 
+  // when there is a photo, change in photos or stickers we want to draw canvas 
   useEffect(drawCanvas, [photos, stickers, selectedSticker, photoCount]);
 
   // Functions to handle photos
@@ -227,7 +238,19 @@ function PhotoBooth() {
       }
     }
 
-    
+    if (mode === "decorate") {
+      // look through all the stickers draw image using info 
+      // if sticker is selected have rectangle around to help user know which sticker is selected
+      for (let i = stickers.length - 1; i >= 0; i--) {
+        const s = stickers[i];
+        if (x >= s.x && x <= s.x + 250 && y >= s.y && y <= s.y + 250) {
+          setDraggingSticker(i);
+          setSelectedSticker(i);
+          setDragOffset({ x: x - s.x, y: y - s.y });
+          return;
+        }
+      }
+    }
   };
 
   // Handle the user's dragging movement that repositions photo/sticker
@@ -253,13 +276,50 @@ function PhotoBooth() {
       });
     }
 
-    
+    if (draggingSticker != null && mode === "decorate") {
+      setStickers((s) => {
+        const u = [...s];
+        u[draggingSticker] = {
+          ...u[draggingSticker],
+          x: x - dragOffset.x,
+          y: y - dragOffset.y,
+        };
+        return u;
+      });
+    }
   };
 
   const handleMouseUp = () => {
     setDraggingPhoto(null);
+    setDraggingSticker(null);
   };
 
+  // Function for stickers
+  const addSticker = (src) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      setStickers((s) => [...s, { img, x: 400, y: 100 }]);
+    }
+  }
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (
+        (e.key === "Delete" || e.key === "Backspace") &&
+        selectedSticker != null &&
+        mode === "decorate"
+      ) {
+        setStickers((s) => s.filter((_, i) => i !== selectedSticker));
+        setSelectedSticker(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedSticker, mode]);
+
+  // Handle back button in photo capture mode to go to select frame mode
   const handleBackBtn = () => {
     if (mode === "decorate") {
       setMode("photo");
@@ -277,6 +337,7 @@ function PhotoBooth() {
       setCanTakePhoto(true);
     }
   }
+
 
   return (
     <div className={styles.centreCol}>
@@ -305,12 +366,12 @@ function PhotoBooth() {
                   onRedo={redoLastPhoto}
                 />
               )}
-              {/* {mode === "decorate" && (
+              {mode === "decorate" && (
                 <StickerPicker
                   stickerOptions={stickerOptions}
                   onAddSticker={addSticker}
                 />
-              )} */}
+              )}
             </div>
             
             {/* Display frame using canvas */}
