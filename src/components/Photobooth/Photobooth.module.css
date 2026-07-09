@@ -39,7 +39,7 @@
 
 .mainContent {
   height: 600px;
-  width: 700px;
+  width: 80vw;
   display: flex;
   justify-content: center;
   align-items: flex-start;

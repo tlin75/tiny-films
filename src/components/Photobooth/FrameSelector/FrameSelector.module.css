@@ -1,11 +1,22 @@
+html {
+  scrollbar-color: #f47499 #fde8f1; /* thumb color (pink) | track color (light pink) */
+  scrollbar-width: auto; 
+}
+
 .grid {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
+  display: flex;
   gap: 24px;
+  overflow-x: auto;
+  padding: 18px 15px;
+  scroll-snap-type: x mandatory;
+  border: 3px solid #fde8f1; 
+  border-radius: 10px;
 }
 
 .frameThumb {
-  width: 180px;
+  width: 200px;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
   cursor: pointer;
   border-radius: 12px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.15);
@@ -14,6 +25,6 @@
 
 .frameThumb:hover,
 .frameThumb.selected {
-  transform: scale(1.08);
-  box-shadow: 0 12px 30px rgba(255, 122, 162, 0.45);
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(125, 116, 119, 0.3);
 }

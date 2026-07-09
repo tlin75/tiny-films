@@ -35,10 +35,14 @@ export default function PhotoBooth() {
   const [mode, setMode] = useState("photo");
 
   const [photos, setPhotos] = useState([]);
+  // number of photos taken or uploaded 
   const [photoCount, setPhotoCount] = useState(0);
+  // check user's camera permissions for browser 
   const [canTakePhoto, setCanTakePhoto] = useState(true);
+  // drag uploaded 
   const [draggingPhoto, setDraggingPhoto] = useState(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  // 3 second coutdown to take photos 
   const [countdown, setCountdown] = useState(null);
 
   const [stickers, setStickers] = useState([]);
@@ -46,7 +50,62 @@ export default function PhotoBooth() {
   const [selectedSticker, setSelectedSticker] = useState(null);
 
   // useEffects 
-  
+  useEffect(() => {
+    if (!selectedFrame) return;
+    // if frame is selected we want to create a new image and specify src to be the frame
+    const img = new Image();
+    img.src = selectedFrame;
+    img.onload = () => {
+      frameImgRef.current = img;
+      drawCanvas();
+    };
+  }, [selectedFrame]);
+
+  const drawCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas || !frameImgRef.current) return;
+
+    const ctx = canvas.getContext("2d");
+    const frameWidth = frameImgRef.current.width;
+    const frameHeight = frameImgRef.current.height;
+    canvas.width = frameWidth;
+    canvas.height = frameHeight;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    photos.forEach((p) => {
+      const slot = slots[p.slotIndex];
+      const drawW = p.img.width * p.scale;
+      const drawH = p.img.height * p.scale;
+      const dx = slot.x + p.offsetX;
+      const dy = slot.y + p.offsetY;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(slot.x, slot.y, SLOT_WIDTH, SLOT_HEIGHT);
+      ctx.clip();
+      ctx.drawImage(p.img, dx, dy, drawW, drawH);
+      ctx.restore();
+    });
+
+    ctx.drawImage(frameImgRef.current, 0, 0, frameWidth, frameHeight);
+
+    stickers.forEach((s, i) => {
+      ctx.drawImage(s.img, s.x, s.y, 150, 150);
+      if (i === selectedSticker) {
+        ctx.strokeStyle = "#ff7aa2";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(s.x, s.y, 150, 150);
+      }
+    });
+  };
+
+  // when there is a photo, change in photocount we want to draw canvas 
+  useEffect(drawCanvas, [photos, stickers, selectedSticker, photoCount]);
+
+  // Functions for photo 
+
+
   const handleBackBtn = () => {
     if (mode === "decorate") {
       setMode("photo");
