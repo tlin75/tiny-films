@@ -1,6 +1,7 @@
 //  useRef for webcam, useState for stickers and frames, useEffect to react to the state changes
 import React, {useRef, useState, useEffect } from 'react';
 import Webcam from "react-webcam";
+import styles from "../styles/Photobooth.module.css";
 
 // import the frames and stickers 
 const frameOptions = [
@@ -46,13 +47,13 @@ const stickerOptions = [
 ];
 
 const videoConstraints = {
-  width: 953,
-  height: 599,
+  width: 881,
+  height: 493,
   faceingMode: "user"
 }
 
-const SLOT_WIDTH = 954;
-const SLOT_HEIGHT = 599;
+const SLOT_WIDTH = 881;
+const SLOT_HEIGHT = 493;
 
 export default function PhotoBooth() {
   const webcamRef = useRef(null);
@@ -65,4 +66,48 @@ export default function PhotoBooth() {
     {x: 63.7, y: 1159.6}, 
     {x: 63.7, y: 1702.9},
   ]
+
+  const [selectedFrame, setSelectedFrame] = useState(null);
+  const [mode, setMode] = useState("photo");
+
+  const [photos, setPhotos] = useState([]);
+  const [photoCount, setPhotoCount] = useState(0);
+  const [canTakePhoto, setCanTakePhoto] = useState(true);
+  const [draggingPhoto, setDraggingPhoto] = useState(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [countdown, setCountdown] = useState(null);
+
+  const [stickers, setStickers] = useState([]);
+  const [draggingSticker, setDraggingSticker] = useState(null);
+  const [selectedSticker, setSelectedSticker] = useState(null);
+  const row = { display: "flex", gap: 40, alignItems: "flex-start" };
+
+  // useEffects 
+  
+
+
+  return (
+    <div className={styles.centreCol}>
+      {/* header with back button and text */}
+      <div className={styles.headerBar}>
+        <button className={styles.backBtn} onClick={handleBack}>
+          &larr; Back
+        </button>
+        <h1 className={styles.titleBar}>
+          {
+            !selectedFrame
+            ? "₊✩‧₊˚ Select a frame౨ৎ ˚₊✩‧₊"
+            : mode === "photo"
+                ? "⋆｡‧˚ʚ Smile :)ɞ˚‧｡⋆"
+                : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."
+          }
+        </h1>
+
+        <div className={styles.mainContent}>
+          {/* map every frame we have created from assets */}
+          
+        </div>
+      </div>
+    </div>
+  )
 }

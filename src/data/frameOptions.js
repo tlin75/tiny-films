@@ -1,0 +1,16 @@
+export const frameOptions = [
+  "/assets/frames/azure-beach.png",
+  "/asset/frames/azure-frame.png",
+  "/asset/frames/black-frame.png",
+  "/asset/frames/cream-flowers.png",
+  "/asset/frames/cream-frame.png",
+  "/asset/frames/cream-simple.png",
+  "/asset/frames/cyan-frame.png",
+  "/asset/frames/cyan-underwater.png",
+  "/asset/frames/pink-cherry-blossom.png",
+  "/asset/frames/pink-frame.png",
+  "/asset/frames/purple-frame.png",
+  "/asset/frames/purple-simple.png",
+  "/asset/frames/yellow-frame.png",
+  "/asset/frames/yellow-simple.png",
+];

@@ -1,0 +1,24 @@
+.btn {
+  padding: 0 16px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  font-family: Fredoka, sans-serif;
+  color: #8c5b4a;
+  border: 2px solid #8c5b4a;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  background: #fdf1ee;
+}
+
+.redoBtn {
+  font-size: 22px;
+  padding: 0 10px;
+}
