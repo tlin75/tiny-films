@@ -1,4 +1,4 @@
-import styles from "./PhotoBooth.module.css";
+import styles from "./Photobooth.module.css";
 import btnStyles from "./Buttons.module.css";
 
 export default function Header({ selectedFrame, mode, onBack }) {

@@ -1,7 +1,7 @@
 //  useRef for webcam, useState for stickers and frames, useEffect to react to the state changes
 import React, {useRef, useState, useEffect } from 'react';
 import Webcam from "react-webcam";
-import styles from "../styles/Photobooth.module.css";
+import styles from "./Photobooth.module.css";
 import Header from "./Header";
 import FrameSelector from "./FrameSelector/FrameSelector";
 import PhotoCapture from "./PhotoCapture/PhotoCapture";
@@ -47,14 +47,31 @@ export default function PhotoBooth() {
 
   // useEffects 
   
-
+  const handleBackBtn = () => {
+    if (mode === "decorate") {
+      setMode("photo");
+      setCanTakePhoto(false);
+      setStickers([]);
+      setSelectedSticker(null);
+    } else {
+      // if mode is photo
+      setSelectedFrame(null);
+      setPhotos([]);
+      setPhotoCount(0);
+      setStickers([]);
+      setSelectedSticker(null);
+      setMode("photo");
+      setCanTakePhoto(true);
+    }
+  }
 
   return (
     <div className={styles.centreCol}>
-      <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBack} />
+      <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBackBtn} />
 
       <div className={styles.mainContent}>
         {!selectedFrame ? (
+          // map the frame options with the file name 
           <FrameSelector
             frameOptions={frameOptions}
             selectedFrame={selectedFrame}
