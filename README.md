@@ -82,6 +82,6 @@ Currently, the app runs at `http://localhost:3000`.
 - [ ] Mobile responsiveness + touch support for dragging photos/stickers
 
 ## Credits
-Fonts: Nunito, Fredoka, Magnifico Daytime ITC.
-Designs: Canva, Figma.
-Icons: Canva, Freepik.
+- Fonts: Nunito, Fredoka, Magnifico Daytime ITC.
+- Designs: Canva, Figma.
+- Icons: Canva, Freepik.
