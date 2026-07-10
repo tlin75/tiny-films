@@ -30,3 +30,29 @@
   display: flex;
   gap: 12px;
 }
+
+.cameraPlaceholder {
+  width: 400px;
+  height: 223px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fde8f1;
+  border-radius: 12px;
+  padding: 0px;
+  color: #f47499;
+  font-family: Fredoka, sans-serif;
+}
+
+.cameraPlaceholder p {
+  margin: 4px 0;
+}
+
+.placeholderSubtext {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  max-width: 300px;
+}
+

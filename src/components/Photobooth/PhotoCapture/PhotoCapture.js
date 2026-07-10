@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Webcam from "react-webcam";
 import btnStyles from "../Buttons.module.css";
 import styles from "./PhotoCapture.module.css";
@@ -12,31 +13,43 @@ function PhotoCapture({
   onUpload,
   onRedo,
 }) {
+  const [cameraError, setCameraError] = useState(false);
+
   return (
     <div>
-      {/* Implmeent webcam specifications */}
       <div className={styles.webcamWrap}>
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          videoConstraints={videoConstraints}
-          mirrored
-          className={styles.webcam}
-        />
+        {cameraError ? (
+          <div className={styles.cameraPlaceholder}>
+            <p>📷 Camera access is disabled</p>
+            <p className={styles.placeholderSubtext}>
+              Please enable camera permissions in your browser settings to take a photo,
+              or upload one instead.
+            </p>
+          </div>
+        ) : (
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            videoConstraints={videoConstraints}
+            mirrored
+            className={styles.webcam}
+            onUserMediaError={() => setCameraError(true)}
+          />
+        )}
 
-        {/* countdown overlay */}
         {countdown != null && (
           <div className={styles.countdownOverlay}>{countdown}</div>
         )}
 
-        {/* Capture photo buttons */}
         <div className={styles.buttonRow}>
           {canTakePhoto && (
             <>
-              <button className={btnStyles.btn} onClick={onCapture}>
-                Take Photo
-              </button>
+              {!cameraError && (
+                <button className={btnStyles.btn} onClick={onCapture}>
+                  Take Photo
+                </button>
+              )}
               <label className={btnStyles.btn} style={{ cursor: "pointer" }}>
                 Upload
                 <input
@@ -50,14 +63,14 @@ function PhotoCapture({
           )}
 
           {photoCount > 0 && (
-            <button className={btnStyles.redoBtn} onClick={onRedo}>
+            <button className={`${btnStyles.btn} ${btnStyles.redoBtn}`} onClick={onRedo}>
               ⟳ Redo
             </button>
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default PhotoCapture
+export default PhotoCapture;
