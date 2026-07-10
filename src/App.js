@@ -1,18 +1,32 @@
 import './App.css';
-import React from "react";
+import React, { useState } from "react";
 import PhotoBooth from "./components/Photobooth/Photobooth";
 import "./styles/global.css";
 const logoSrc = "/assets/logo/tinyfilms-logo.png";
 
 function App() {
+  // mode is always one of: "welcome" | "frame" | "photo" | "decorate"
+  // "welcome" → "frame" → "photo" → "decorate"
+  const [mode, setMode] = useState("welcome");
+
+  const goToWelcome = () => setMode("welcome");
+
   return (
     <div className="app">
       <div className="appHeader">
-        <img className="logoPic" src={logoSrc} alt="TinyFilms Logo" />
-        <h1 className="logoName">Tiny Films</h1>
+        <img
+          className="logoPic"
+          src={logoSrc}
+          alt="TinyFilms Logo"
+          onClick={goToWelcome}
+          style={{ cursor: "pointer" }}
+        />
+        <h1 className="logoName" onClick={goToWelcome} style={{ cursor: "pointer" }}>
+          Tiny Films
+        </h1>
       </div>
       <div className="appContent">
-        <PhotoBooth />
+        <PhotoBooth mode={mode} setMode={setMode} />
       </div>
     </div>
   );
