@@ -9,8 +9,10 @@ html {
   overflow-x: auto;
   padding: 18px 15px;
   scroll-snap-type: x mandatory;
-  border: 3px solid #fde8f1; 
+  border: 2px dashed #f47499; 
   border-radius: 10px;
+  box-shadow: 18px -18px 8px rgba(253, 232, 241, 1);
+  margin-top: 30px;
 }
 
 .frameThumb {

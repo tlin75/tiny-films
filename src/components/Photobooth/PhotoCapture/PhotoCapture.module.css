@@ -44,6 +44,7 @@
   padding: 0px;
   color: #f47499;
   font-family: Fredoka, sans-serif;
+  border: 2px dashed #f47499; 
 }
 
 .cameraPlaceholder p {
