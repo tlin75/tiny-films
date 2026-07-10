@@ -1,5 +1,5 @@
 //  useRef for webcam, useState for stickers and frames, useEffect to react to the state changes
-import React, {useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import styles from "./Photobooth.module.css";
 import Header from "./Header";
 import Welcome from "./Welcome/Welcome";
@@ -19,24 +19,20 @@ const videoConstraints = {
 const SLOT_WIDTH = 881;
 const SLOT_HEIGHT = 493;
 
-function PhotoBooth() {
+function PhotoBooth({ mode, setMode }) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const frameImgRef = useRef(null);
 
-  const slots = [
-    {x: 63.7, y: 73.1},
-    {x: 63.7, y: 616.3},
-    {x: 63.7, y: 1159.6}, 
-    {x: 63.7, y: 1702.9},
-  ]
-
-  const [hasStarted, setHasStarted] = useState(false);
+  const slots = useMemo(() => [
+    { x: 63.7, y: 73.1 },
+    { x: 63.7, y: 616.3 },
+    { x: 63.7, y: 1159.6 },
+    { x: 63.7, y: 1702.9 },
+  ], []);
 
   const [selectedFrame, setSelectedFrame] = useState(null);
-  // mode is always one of: "welcome" | "frame" | "photo" | "decorate"
-  // "welcome" → "frame" → "photo" → "decorate"
-  const [mode, setMode] = useState("welcome");
+  
   // Welcome screen "Get Started" button:
   const handleGetStarted = () => setMode("frame");
 
@@ -55,19 +51,7 @@ function PhotoBooth() {
   const [draggingSticker, setDraggingSticker] = useState(null);
   const [selectedSticker, setSelectedSticker] = useState(null);
 
-  // useEffects 
-  useEffect(() => {
-    if (!selectedFrame) return;
-    // if frame is selected we want to create a new image and specify src to be the frame
-    const img = new Image();
-    img.src = selectedFrame;
-    img.onload = () => {
-      frameImgRef.current = img;
-      drawCanvas();
-    };
-  }, [selectedFrame]);
-
-  const drawCanvas = () => {
+  const drawCanvas = useCallback((withSelectionOutline = true) => {
     const canvas = canvasRef.current;
     if (!canvas || !frameImgRef.current) return;
 
@@ -109,17 +93,41 @@ function PhotoBooth() {
 
       ctx.drawImage(s.img, s.x + offsetX, s.y + offsetY, drawW, drawH);
 
-      if (i === selectedSticker) {
+      // only draw the outline if requested AND this sticker is selected
+      if (withSelectionOutline && i === selectedSticker) {
         ctx.strokeStyle = "#ff7aa2";
         ctx.lineWidth = 4;
         ctx.strokeRect(s.x, s.y, BOX, BOX);
       }
     });
-  };
+  }, [photos, stickers, selectedSticker, slots]);
+
+  // useEffects 
+  useEffect(() => {
+    if (mode === "welcome") {
+      setSelectedFrame(null);
+      setPhotos([]);
+      setPhotoCount(0);
+      setStickers([]);
+      setSelectedSticker(null);
+      setCanTakePhoto(true);
+    }
+  }, [mode]);
+  
+  useEffect(() => {
+    if (!selectedFrame) return;
+    // if frame is selected we want to create a new image and specify src to be the frame
+    const img = new Image();
+    img.src = selectedFrame;
+    img.onload = () => {
+      frameImgRef.current = img;
+      drawCanvas();
+    };
+  }, [selectedFrame, drawCanvas]);
 
   // when there is a photo, change in photos or stickers we want to draw canvas 
-  useEffect(drawCanvas, [photos, stickers, selectedSticker, photoCount]);
-
+  useEffect(drawCanvas, [photos, stickers, selectedSticker, photoCount, drawCanvas]);
+  
   // Functions to handle photos
   const addPhoto = (img) => {
     // if we have four photos we do not want anymore 
@@ -327,7 +335,6 @@ function PhotoBooth() {
   }, [selectedSticker, mode]);
 
   // Handle back button in photo capture mode to go to select frame mode
-  // handleBackBtn:
   const handleBackBtn = () => {
     if (mode === "decorate") {
       setMode("photo");
@@ -343,22 +350,28 @@ function PhotoBooth() {
   };
 
   const downloadPhoto = () => {
-    const a = document.createElement("a");
-    a.href = canvasRef.current.toDataURL("image/png");
-    a.download = "tiny-films.png";
-    a.click();
-  };
+  // redraw without the selection outline
+  drawCanvas(false);
+
+  const a = document.createElement("a");
+  a.href = canvasRef.current.toDataURL("image/png");
+  a.download = "tiny-films.png";
+  a.click();
+
+  // restore the normal view (with outline, if something is still selected)
+  drawCanvas(true);
+};
 
   return (
     <div className={styles.centreCol}>
-      {!hasStarted ? (
-        <Welcome onGetStarted={() => setHasStarted(true)} />
+      {mode === "welcome" ? (
+        <Welcome onGetStarted={handleGetStarted} />
       ) : (
         <>
-          <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBack} />
+          <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBackBtn} />
 
           <div className={styles.mainContent}>
-            {!selectedFrame ? (
+            {mode === "frame" ? (
               <FrameSelector
                 frameOptions={frameOptions}
                 selectedFrame={selectedFrame}
