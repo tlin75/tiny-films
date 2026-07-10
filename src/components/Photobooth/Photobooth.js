@@ -1,8 +1,8 @@
 //  useRef for webcam, useState for stickers and frames, useEffect to react to the state changes
 import React, {useRef, useState, useEffect } from 'react';
-import Webcam from "react-webcam";
 import styles from "./Photobooth.module.css";
 import Header from "./Header";
+import Welcome from "./Welcome/Welcome";
 import FrameSelector from "./FrameSelector/FrameSelector";
 import PhotoCapture from "./PhotoCapture/PhotoCapture";
 import StickerPicker from "./StickerPicker/StickerPicker";
@@ -31,8 +31,14 @@ function PhotoBooth() {
     {x: 63.7, y: 1702.9},
   ]
 
+  const [hasStarted, setHasStarted] = useState(false);
+
   const [selectedFrame, setSelectedFrame] = useState(null);
-  const [mode, setMode] = useState("photo");
+  // mode is always one of: "welcome" | "frame" | "photo" | "decorate"
+  // "welcome" → "frame" → "photo" → "decorate"
+  const [mode, setMode] = useState("welcome");
+  // Welcome screen "Get Started" button:
+  const handleGetStarted = () => setMode("frame");
 
   const [photos, setPhotos] = useState([]);
   // number of photos taken or uploaded 
@@ -321,23 +327,20 @@ function PhotoBooth() {
   }, [selectedSticker, mode]);
 
   // Handle back button in photo capture mode to go to select frame mode
+  // handleBackBtn:
   const handleBackBtn = () => {
     if (mode === "decorate") {
       setMode("photo");
-      setCanTakePhoto(false);
       setStickers([]);
       setSelectedSticker(null);
-    } else {
-      // if mode is photo
+    } else if (mode === "photo") {
       setSelectedFrame(null);
       setPhotos([]);
       setPhotoCount(0);
-      setStickers([]);
-      setSelectedSticker(null);
-      setMode("photo");
-      setCanTakePhoto(true);
+      setMode("frame");
     }
-  }
+    // no back button needed from "frame" or "welcome"
+  };
 
   const downloadPhoto = () => {
     const a = document.createElement("a");
@@ -348,52 +351,58 @@ function PhotoBooth() {
 
   return (
     <div className={styles.centreCol}>
-      <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBackBtn} />
+      {!hasStarted ? (
+        <Welcome onGetStarted={() => setHasStarted(true)} />
+      ) : (
+        <>
+          <Header selectedFrame={selectedFrame} mode={mode} onBack={handleBack} />
 
-      <div className={styles.mainContent}>
-        {!selectedFrame ? (
-          // map the frame options with the file name
-          <FrameSelector
-            frameOptions={frameOptions}
-            selectedFrame={selectedFrame}
-            onSelect={setSelectedFrame}
-          />
-        ) : (
-          <div className={styles.row}>
-            <div>
-              {mode === "photo" && (
-                <PhotoCapture
-                  webcamRef={webcamRef}
-                  videoConstraints={videoConstraints}
-                  countdown={countdown}
-                  canTakePhoto={canTakePhoto}
-                  photoCount={photoCount}
-                  onCapture={capturePhoto}
-                  onUpload={uploadPhoto}
-                  onRedo={redoLastPhoto}
+          <div className={styles.mainContent}>
+            {!selectedFrame ? (
+              <FrameSelector
+                frameOptions={frameOptions}
+                selectedFrame={selectedFrame}
+                onSelect={(frame) => {
+                  setSelectedFrame(frame);
+                  setMode("photo");
+                }}
+              />
+            ) : (
+              <div className={styles.row}>
+                <div>
+                  {mode === "photo" && (
+                    <PhotoCapture
+                      webcamRef={webcamRef}
+                      videoConstraints={videoConstraints}
+                      countdown={countdown}
+                      canTakePhoto={canTakePhoto}
+                      photoCount={photoCount}
+                      onCapture={capturePhoto}
+                      onUpload={uploadPhoto}
+                      onRedo={redoLastPhoto}
+                    />
+                  )}
+                  {mode === "decorate" && (
+                    <StickerPicker
+                      stickerOptions={stickerOptions}
+                      onAddSticker={addSticker}
+                    />
+                  )}
+                </div>
+
+                <PhotoCanvas
+                  canvasRef={canvasRef}
+                  mode={mode}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onDownload={downloadPhoto}
                 />
-              )}
-              {mode === "decorate" && (
-                <StickerPicker
-                  stickerOptions={stickerOptions}
-                  onAddSticker={addSticker}
-                />
-              )}
-            </div>
-            
-            {/* Display frame using canvas */}
-            <PhotoCanvas
-              canvasRef={canvasRef}
-              mode={mode}
-              // mouse movement functionality
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onDownload={downloadPhoto}
-            />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }

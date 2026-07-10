@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       <div className="appHeader">
         <img className="logoPic" src={logoSrc} alt="TinyFilms Logo" />
-        <h1 className="logoName">TinyFilms Photobooth</h1>
+        <h1 className="logoName">Tiny Films</h1>
       </div>
       <div className="appContent">
         <PhotoBooth />

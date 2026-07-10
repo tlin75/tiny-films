@@ -1,19 +1,15 @@
 import styles from "./Photobooth.module.css";
 import btnStyles from "./Buttons.module.css";
 
-export default function Header({ selectedFrame, mode, onBack }) {
+function Header({ selectedFrame, mode, onBack }) {
   return (
-    <div className={styles.headerAll}> 
+    <div className={styles.headerAll}>
       {selectedFrame && (
-        <button
-          className={`${btnStyles.btn} ${styles.backBtn}`}
-          onClick={onBack}
-        >
+        <button className={`${btnStyles.btn} ${styles.backBtn}`} onClick={onBack}>
           &larr; Back
         </button>
       )}
       <div className={styles.headerBar}>
-        
         <h1 className={styles.titleBar}>
           {!selectedFrame
             ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
@@ -25,3 +21,5 @@ export default function Header({ selectedFrame, mode, onBack }) {
     </div>
   );
 }
+
+export default Header

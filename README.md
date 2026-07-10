@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# 🎀 TinyFilms Photobooth
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A cute, browser-based photobooth app — pick a film-strip frame, snap or upload photos, then decorate your strip with stickers. Everything is composited live on an HTML5 canvas so you get a downloadable, shareable final image.
 
-## Available Scripts
+![TinyFilms Photobooth banner](public/assets/logo/tinyfilms-logo.png)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- 📷 **Live webcam capture** with a 3-second countdown, or upload your own photos
+- 🖼️ **Frame selection** — choose from a variety of pastel/aesthetic film-strip frames
+- 🎨 **Drag-and-drop editing** — reposition photos within their slots after capture
+- 🧷 **Sticker decoration mode** — add, drag, select, and delete stickers on your strip
+- ⌨️ **Keyboard support** — delete a selected sticker with `Backspace`/`Delete`
+- 🔁 **Redo/retake** — remove the last photo and recapture if you're not happy with it
+- 💅 Fully custom, playful UI styled to match the TinyFilms brand
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React** (functional components + hooks: `useState`, `useRef`, `useEffect`)
+- **react-webcam** for camera access and screenshot capture
+- **HTML5 Canvas API** for compositing photos, frames, and stickers
+- **CSS Modules** for scoped component styling
 
-### `npm test`
+## 📁 Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+├── components/
+│   └── Photobooth/
+│       ├── Photobooth.js          # Main app logic & canvas rendering
+│       ├── Header.js              # Title bar + back navigation
+│       ├── FrameSelector/         # Frame picker carousel
+│       ├── PhotoCapture/          # Webcam + upload controls
+│       ├── PhotoCanvas/           # Canvas element wrapper
+│       └── StickerPicker/         # Sticker grid picker
+├── data/
+│   ├── frameOptions.js            # List of available frame image paths
+│   └── stickerOptions.js          # List of available sticker image paths
+└── styles/
+    └── global.css
 
-### `npm run build`
+public/
+└── assets/
+    ├── frames/                    # Frame PNGs
+    ├── stickers/                  # Sticker PNGs
+    └── fonts/                     # Custom fonts (Fredoka, Magnifico)
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Node.js](https://nodejs.org/) (v16 or later recommended)
+- npm or yarn
 
-### `npm run eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# Clone the repo
+git clone https://github.com/your-username/tinyfilms-photobooth.git
+cd tinyfilms-photobooth
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install dependencies
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start the development server
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The app will be running at `http://localhost:3000`.
 
-## Learn More
+> **Note:** Your browser will ask for camera permission on first use — this is required for the webcam capture feature to work.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🖥️ Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Select a frame** from the carousel on the home screen.
+2. **Take or upload 4 photos** to fill the frame's photo slots — drag each photo within its slot to reposition it.
+3. Once all 4 slots are filled, you're moved into **decorate mode** — pick stickers from the picker and drag them anywhere on your strip.
+4. Click a sticker to select it (shown with a pink outline), then press `Delete`/`Backspace` to remove it.
+5. Use the **Back** button to return to the previous step at any time.
 
-### Code Splitting
+## 🎨 Adding Your Own Frames or Stickers
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Drop new image files into `public/assets/frames/` or `public/assets/stickers/`.
+2. Add the corresponding path (e.g. `/assets/frames/my-frame.png`) to `src/data/frameOptions.js` or `stickerOptions.js`.
 
-### Analyzing the Bundle Size
+> Paths should **not** include the `public` prefix — anything in `public/` is served from the site root.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📌 Roadmap / Ideas
+- [ ] Add more filters/effects to captured photos
+- [ ] Sticker resizing via drag handles
+- [ ] Mobile touch support for dragging photos/stickers
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Credits
+Fonts: Nunito, Fredoka, Magnifico Daytime ITC.
+Designs: Canva, Figma.
+Icons: Canva, Freepik.
