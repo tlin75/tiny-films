@@ -59,20 +59,33 @@
 }
 
 .app {
-  min-height: 100vh;
+  height: 100dvh;      /* dvh handles mobile browser chrome better than vh */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
+  overflow: hidden;     /* prevent the page itself from scrolling */
 }
 
 .appHeader {
-  width: 100%;
-  max-width: 1200px;
+  flex-shrink: 0;       /* header keeps its natural height */
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 20px 32px 5px 32px;
-  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  background-color: #fffaf2;
+}
+
+.appContent {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  background-color: #aee1fe;
 }
 
 .logoPic {
@@ -81,17 +94,28 @@
 
 .logoName {
   font-family: "Magnifico";
-  color: "#f47499";
+  color: #f47499;
   margin: 0;
   font-size: 1.7rem;
   font-style: oblique;
 }
 
-.appContent {
-  flex: 1;
-  width: "100%";
-  display: "flex";
-  justify-content: "center";
-  align-items: "center";
-  padding-bottom: "40px";
+/* mobile reponsiveness */
+@media (max-width: 600px) {
+  .appContent {
+    padding: 10px 0;
+  }
+
+  .appHeader {
+    padding: 10px 15px;
+    gap: 8px;
+  }
+
+  .logoPic {
+    width: 38px;
+  }
+
+  .logoName {
+    font-size: 1.2rem;
+  }
 }

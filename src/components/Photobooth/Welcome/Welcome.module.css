@@ -16,25 +16,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  gap: clamp(12px, 2vh, 24px);
   text-align: center;
-  padding: 40px 20px;
+  padding: clamp(12px, 3vh, 40px) 20px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .title {
   font-family: "Magnifico";
   color: #f47499;
-  font-size: 40px;
+  font-size: clamp(24px, 4vw, 40px);
   margin: 0;
   padding: 0;
   background-color: #fde8f1;
-  width: 55vw;
+  width: min(80vw, 700px);
 }
 
 .subtitle {
   font-family: "Nunito";
   color: #f47499;
-  font-size: 18px;
+  font-size: clamp(18px, 1.5vw, 30px);
   margin: 0;
   opacity: 0.85;
   font-style: italic;
@@ -42,17 +45,18 @@
 
 .previewSteps {
   display: flex;
+  flex-wrap: wrap;          /* lets columns wrap on narrow/short screens instead of forcing width */
   justify-content: center;
-  gap: 45px; /* same gap for both rows now, since they're one row */
-  margin: 12px 0 24px;
+  gap: clamp(16px, 3vw, 45px);
+  margin: 12px 0 0;
   align-items: flex-start;
   border: 2px dashed #f47499;
   border-radius: 12px;
-  background-color: white;
-  width: 52vw;
-  padding: 17px 15px 0px 15px;
+  width: min(80vw, 690px);
+  padding: 15px;
   box-shadow: 15px -15px 8px rgba(253, 232, 241, 1);
   background-color: #fffaf2;
+  box-sizing: border-box;
 }
 
 .previewCol {
@@ -63,7 +67,7 @@
 }
 
 .previewImg {
-  width: 120px;
+  width: clamp(70px, 10vw, 120px);   /* shrinks on short/narrow viewports */
   border-radius: 10px;
   box-shadow: 0 4px 4px rgba(255, 122, 162, 0.25);
   transition: transform 0.25s ease;
@@ -92,4 +96,61 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+}
+
+/* mobile responsiveness */
+@media (max-width: 512px) {
+  .wrap {
+    justify-content: flex-start;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 4vw;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .previewSteps {
+    flex-direction: row;    /* stack the 3 steps vertically */
+    width: 100%;
+    gap: 10px;
+    padding: 15px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .previewSteps {
+    grid-template-columns: 1fr;   /* single column instead of "auto 1fr" */
+    justify-items: center;         /* center each row's content */
+    max-height: 45vh;
+    overflow-y: auto;
+    gap: 10vw;
+    padding: 10px;
+    box-shadow: 8px -8px 6px rgba(253, 232, 241, 1);
+  }
+
+  .previewImg {
+    width: 60px;
+    justify-self: center;
+  }
+
+  .step {
+    flex-direction: column; 
+    align-items: center;
+    width: 60px;
+    text-align: center;
+    gap: 6px;
+    font-size: 0.72rem;
+  }
+
+  .stepNum {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
 }
