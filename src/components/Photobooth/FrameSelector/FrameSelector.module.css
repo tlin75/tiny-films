@@ -1,32 +1,74 @@
 html {
-  scrollbar-color: #f47499 #fde8f1; /* thumb color (pink) | track color (light pink) */
-  scrollbar-width: auto; 
+  scrollbar-color: #f47499 #fde8f1;
+  scrollbar-width: auto;
 }
 
 .grid {
   display: flex;
   gap: 24px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 18px 15px;
   scroll-snap-type: x mandatory;
-  border: 2px dashed #f47499; 
+  border: 2px dashed #f47499;
   border-radius: 10px;
-  box-shadow: 18px -18px 8px rgba(253, 232, 241, 1);
+  box-shadow: 18px -18px 8px rgba(255, 250, 242, 1);
   margin-top: 30px;
+  background-color: #ffffff;
+  width: min(90vw, 1000px);
+  box-sizing: border-box;
+  height: 70vh;
+  align-items: center;
 }
 
 .frameThumb {
-  width: 200px;
+  height: 100%;
+  width: auto;
   flex: 0 0 auto;
   scroll-snap-align: center;
   cursor: pointer;
   border-radius: 12px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  object-fit: contain;
 }
 
 .frameThumb:hover,
 .frameThumb.selected {
   transform: scale(1.05);
   box-shadow: 0 12px 30px rgba(125, 116, 119, 0.3);
+}
+
+/* medium screen sizes */
+@media (max-width: 700px) {
+  .grid {
+    height: 60vh;
+    gap: 18px;
+    padding: 16px 12px;
+    margin-top: 20px;
+  }
+}
+
+/* mobile devices */
+@media (max-width: 512px) {
+  .grid {
+    gap: 14px;
+    padding: 14px 10px;
+    box-shadow: 10px -10px 6px rgba(255, 250, 242, 1);
+    border-radius: 8px;
+  }
+
+  .frameThumb:hover,
+  .frameThumb.selected {
+    transform: scale(1.03);   /* smaller scale bump so it doesn't overflow the row on tap */
+  }
+}
+
+/* ---- Very small phones ---- */
+@media (max-width: 400px) {
+  .grid {
+    gap: 10px;
+    padding: 12px 8px;
+  }
+
 }
