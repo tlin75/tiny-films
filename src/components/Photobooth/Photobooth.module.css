@@ -14,27 +14,31 @@
 }
 
 .headerAll {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  position: relative;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
   width: min(90vw, 800px);
   margin: 0 auto;
 }
 
-.backBtn {
-  font-family: "Fredoka";
-  justify-self: start;
-  padding: 6px 14px;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
 .headerBar {
-  grid-column: 2;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.backBtn {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 12px;
+  font-family: "Fredoka";
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .titleBar {

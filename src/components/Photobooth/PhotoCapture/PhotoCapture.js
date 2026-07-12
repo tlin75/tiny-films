@@ -17,7 +17,7 @@ function PhotoCapture({
 
   return (
     <div>
-      <div className={styles.webcamWrap}>
+      <div className={styles.webcamStage}>
         {cameraError ? (
           <div className={styles.cameraPlaceholder}>
             <p>📷 Camera access is disabled</p>
@@ -41,33 +41,33 @@ function PhotoCapture({
         {countdown != null && (
           <div className={styles.countdownOverlay}>{countdown}</div>
         )}
+      </div>
 
-        <div className={styles.buttonRow}>
-          {canTakePhoto && (
-            <>
-              {!cameraError && (
-                <button className={btnStyles.btn} onClick={onCapture}>
-                  Take Photo
-                </button>
-              )}
-              <label className={btnStyles.btn} style={{ cursor: "pointer" }}>
-                Upload
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={onUpload}
-                  style={{ display: "none" }}
-                />
-              </label>
-            </>
-          )}
+      <div className={styles.buttonRow}>
+        {canTakePhoto && (
+          <>
+            {!cameraError && (
+              <button className={btnStyles.btn} onClick={onCapture}>
+                Take Photo
+              </button>
+            )}
+            <label className={btnStyles.btn} style={{ cursor: "pointer" }}>
+              Upload
+              <input
+                type="file"
+                accept="image/*"
+                onChange={onUpload}
+                style={{ display: "none" }}
+              />
+            </label>
+          </>
+        )}
 
-          {photoCount > 0 && (
-            <button className={`${btnStyles.btn} ${btnStyles.redoBtn}`} onClick={onRedo}>
-              ⟳ Redo
-            </button>
-          )}
-        </div>
+        {photoCount > 0 && (
+          <button className={`${btnStyles.btn} ${btnStyles.redoBtn}`} onClick={onRedo}>
+            ⟳ Redo
+          </button>
+        )}
       </div>
     </div>
   );
