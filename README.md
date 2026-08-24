@@ -4,7 +4,7 @@ A browser-based photobooth app where user can pick a film-strip frame, capture o
 
 ![TinyFilms Photobooth banner](public/assets/logo/tinyfilms-logo.png)
 
-## ✨ Features
+## Features
 
 - Live webcam capture with a 3-second countdown, or upload your own photos
 - Frame selection: Choose from a variety of pastel/aesthetic film-strip frames
@@ -13,11 +13,11 @@ A browser-based photobooth app where user can pick a film-strip frame, capture o
 - Keyboard support: delete a selected sticker using `Backspace`/`Delete` keys
 - Redo: remove the last photo and recapture if you're not happy with it
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- React, HTML, CSS
+- Frontend: React, HTML, CSS
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -42,7 +42,7 @@ public/
     └── fonts/        
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -67,7 +67,7 @@ Currently, the app runs at `http://localhost:3000`.
 
 > **Note:** Your browser will ask for camera permission on first use — this is required for the webcam capture feature to work.
 
-## 🖥️ Usage
+## Usage
 
 1. **Select a frame** from the carousel on the home screen.
 2. **Take or upload 4 photos** to fill the frame's photo slots
@@ -76,7 +76,7 @@ Currently, the app runs at `http://localhost:3000`.
 5. Click download to get a png of your film strip.
 6. Use the **Back** button to return to the previous step at any time.
 
-## 📌 Further Implementation
+## Further Implementation
 - [ ] Add more filters/effects to captured photos
 - [ ] Sticker resizing via drag handles
 - [ ] Mobile responsiveness + touch support for dragging photos/stickers
