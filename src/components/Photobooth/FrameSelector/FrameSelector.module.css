@@ -1,5 +1,5 @@
 html {
-  scrollbar-color: #f47499 #fde8f1;
+  scrollbar-color: #aee1fe #2a68b2;
   scrollbar-width: auto;
 }
 
@@ -10,11 +10,11 @@ html {
   -webkit-overflow-scrolling: touch;
   padding: 18px 15px;
   scroll-snap-type: x mandatory;
-  border: 2px dashed #f47499;
+  border: 2px dashed #2a68b2;
   border-radius: 10px;
-  box-shadow: 18px -18px 8px rgba(255, 250, 242, 1);
+  box-shadow: 18px -18px 8px rgba(232, 246, 255, 1);
   margin-top: 30px;
-  background-color: #ffffff;
+  background-color: #fffaf2;
   width: min(90vw, 1000px);
   box-sizing: border-box;
   height: 70vh;
@@ -31,6 +31,7 @@ html {
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   object-fit: contain;
+  background-color: #ffffff;
 }
 
 .frameThumb:hover,

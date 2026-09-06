@@ -2,8 +2,6 @@ import btnStyles from "../Buttons.module.css";
 import styles from "./Welcome.module.css";
 import { framePreview } from "../../../data/framePreview";
 
-const logoSrc = "/assets/logo/tinyfilms-logo.png";
-
 function Welcome({ onGetStarted }) {
   return (
     <div className={styles.wrap}>

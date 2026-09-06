@@ -4,10 +4,10 @@
   line-height: 40px;
   font-size: 20px;
   font-family: Fredoka, sans-serif;
-  color: #f47499;
-  border: 2px solid #fde8f1;
+  color: #2a68b2;
+  border: 2px solid #2a68b2;
   border-radius: 8px;
-  background: #fde8f1;
+  background: #aadbf6;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -15,9 +15,9 @@
 }
 
 .btn:hover {
-  background: #f47499;
-  color: #fde8f1;
-  border: 2px solid #fde8f1;
+  background: #2a68b2;
+  color: #aee1fe;
+  border: 2px solid #aee1fe;
 }
 
 .redoBtn {
@@ -26,10 +26,12 @@
 }
 
 .startBtn {
-  border: 2px solid #f47499;
+  border: 2px solid #2a68b2;
+  background: #fffaf2;
+  box-shadow: 0px 4px 4px rgba(255, 250, 242, 1);
 }
 
 .startBtn:hover {
   box-shadow: 0px -0px 0px rgba(0, 0, 0, 1);
-  border-color: #f47499;
+  border-color: #2a68b2;
 }

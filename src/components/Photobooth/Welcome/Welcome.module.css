@@ -26,17 +26,17 @@
 
 .title {
   font-family: "Magnifico";
-  color: #f47499;
+  color: #2a68b2;
   font-size: clamp(24px, 4vw, 40px);
   margin: 0;
   padding: 0;
-  background-color: #fde8f1;
+  background-color: #fffaf2;
   width: min(80vw, 700px);
 }
 
 .subtitle {
   font-family: "Nunito";
-  color: #f47499;
+  color: #2a68b2;
   font-size: clamp(18px, 1.5vw, 30px);
   margin: 0;
   opacity: 0.85;
@@ -50,11 +50,11 @@
   gap: clamp(16px, 3vw, 45px);
   margin: 12px 0 0;
   align-items: flex-start;
-  border: 2px dashed #f47499;
+  border: 2px dashed #2a68b2;
   border-radius: 12px;
   width: min(80vw, 690px);
   padding: 15px;
-  box-shadow: 15px -15px 8px rgba(253, 232, 241, 1);
+  box-shadow: 15px -15px 8px rgba(232, 246, 255, 1);
   background-color: #fffaf2;
   box-sizing: border-box;
 }
@@ -83,7 +83,7 @@
   align-items: center;
   gap: 6px;
   font-family: Fredoka, sans-serif;
-  color: #f47499;
+  color: #2a68b2;
   font-size: 0.9rem;
 }
 
@@ -91,7 +91,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #fde8f1;
+  background: #aadbf6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,7 +131,7 @@
     overflow-y: auto;
     gap: 10vw;
     padding: 10px;
-    box-shadow: 8px -8px 6px rgba(253, 232, 241, 1);
+    box-shadow: 8px -8px 6px rgba(232, 246, 255, 1);
   }
 
   .previewImg {
