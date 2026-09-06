@@ -2,7 +2,7 @@
 
 A browser-based photobooth app where user can pick a film-strip frame, capture or upload photos, then decorate their strip with stickers. Everything is composited live on an HTML5 canvas so you get a downloadable, shareable film strip.
 
-![TinyFilms Photobooth banner](public/assets/logo/tinyfilms-logo.png)
+![TinyFilms Photobooth Usage](public/assets/other/photobooth-main-usage.png)
 
 ## Features
 
