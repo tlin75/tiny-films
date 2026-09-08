@@ -4,11 +4,9 @@ import btnStyles from "./Buttons.module.css";
 function Header({ selectedFrame, mode, onBack }) {
   return (
     <div className={styles.headerAll}>
-      {selectedFrame && (
-        <button className={`${btnStyles.btn} ${styles.backBtn}`} onClick={onBack}>
-          &larr; Back
-        </button>
-      )}
+      <button className={`${btnStyles.btn} ${styles.backBtn}`} onClick={onBack}>
+        &larr; Back
+      </button>
       <div className={styles.headerBar}>
         <h1 className={styles.titleBar}>
           {!selectedFrame

@@ -13,15 +13,6 @@
   gap: 20px;
 }
 
-.headerAll {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: min(90vw, 800px);
-  margin: 0 auto;
-}
-
 .headerBar {
   position: relative;
   display: flex;
@@ -29,16 +20,40 @@
   justify-content: center;
 }
 
+.headerAll {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: min(80vw, 900px);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.mainContent {
+  width: min(80vw, 900px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  gap: clamp(16px, 4vw, 40px);
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
 .backBtn {
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 12px;
   font-family: "Fredoka";
   padding: 6px 14px;
   font-size: 0.9rem;
   white-space: nowrap;
+  justify-self: start;
+  grid-column: 1;
 }
 
 .titleBar {
@@ -48,19 +63,15 @@
   margin: 0;
   padding: 0;
   background-color: #ceedfe;
-  width: min(80vw, 700px);
+  width: 100%;
   text-align: center;
+  grid-column: 2;
 }
 
-.mainContent {
-  width: 90vw;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.row {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
+/* mobile responsiveness */
+@media (max-width: 500px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
 }

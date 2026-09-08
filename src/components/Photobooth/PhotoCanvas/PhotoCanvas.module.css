@@ -1,6 +1,8 @@
 .canvas {
-  width: 200px;
-  height: 500px;
+  width: auto;
+  height: min(75vh, 800px);
+  display: block;
+  margin: 0 auto;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   background-color: #fffaf2;
@@ -10,4 +12,12 @@
   margin-top: 16px;
   display: flex;
   justify-content: center;
+}
+
+/* mobile responsiveness */
+@media (max-width: 500px) {
+  .canvas {
+    width: min(90vw, 350px);
+    height: auto;
+  }
 }

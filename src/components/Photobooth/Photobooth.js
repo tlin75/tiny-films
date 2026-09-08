@@ -345,9 +345,10 @@ function PhotoBooth({ mode, setMode }) {
       setPhotos([]);
       setPhotoCount(0);
       setMode("frame");
+    } else if (mode === "frame") {
+      setMode("welcome");
     }
-    // no back button needed from "frame" or "welcome"
-  };
+};
 
   const downloadPhoto = () => {
   // redraw without the selection outline

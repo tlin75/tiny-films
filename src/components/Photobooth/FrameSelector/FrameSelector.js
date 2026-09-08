@@ -12,11 +12,11 @@ const themes = [
     match: (src) => src.includes("/azure-") ||  src.includes("/dark-blue-"),
   },
   {
-    label: "Cream & Yellow",
+    label: "Cream/Yellow",
     match: (src) => src.includes("/cream-") || src.includes("/yellow-"),
   },
   {
-    label: "Pink & Purple",
+    label: "Pink/Purple",
     match: (src) => src.includes("/pink-") || src.includes("/purple-"),
   },
   {
