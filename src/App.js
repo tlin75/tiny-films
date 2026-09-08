@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState } from "react";
 import PhotoBooth from "./components/Photobooth/Photobooth";
 import "./styles/global.css";
-const logoSrc = "/assets/logo/tinyfilms-logo.png";
+const logoSrc = "/assets/logo/tiny-films-logo.png";
 
 function App() {
   // mode is always one of: "welcome" | "frame" | "photo" | "decorate"

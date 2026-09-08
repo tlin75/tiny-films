@@ -1,4 +1,4 @@
-.btn {
+.btn, .redoBtn {
   padding: 0 14px;
   height: 36px;
   line-height: 36px;
@@ -15,21 +15,18 @@
   white-space: nowrap;
 }
 
-.btn:hover {
+.btn:hover,
+.redoBtn:hover {
   background: #2a68b2;
   color: #aee1fe;
   border: 2px solid #aee1fe;
 }
 
-.redoBtn {
-  font-size: clamp(15px, 3.8vw, 22px);
-  padding: 0 clamp(6px, 2vw, 10px);
-}
-
 .startBtn {
   border: 2px solid #2a68b2;
   background: #fffaf2;
-  box-shadow: 0px 4px 4px rgba(255, 250, 242, 1);
+  box-shadow: 3px -3px 4px rgba(255, 250, 242, 1);
+  margin: 0;
 }
 
 .startBtn:hover {
@@ -40,15 +37,11 @@
 /* mobile responsiveness */
 
 @media (max-width: 850px) {
-  .btn {
+  .btn, .redoBtn {
     font-size: clamp(10px, 2.3vw, 14px);
     padding: 0 clamp(5px, 2.3vw, 12px);
     height: clamp(25px, 6vw, 36px);
     line-height: clamp(20px, 6vw, 36px);
   }
 
-  .redoBtn {
-    font-size: clamp(14px, 3.8vw, 18px);
-    padding: 0 clamp(6px, 2vw, 8px);
-  }
 }

@@ -9,10 +9,10 @@ function Header({ selectedFrame, mode, onBack }) {
       </button>
       <h1 className={styles.titleBar}>
         {!selectedFrame
-          ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
+          ? "₊✩‧₊˚ Select a frame ˚₊✩‧₊"
           : mode === "photo"
-          ? "⋆｡‧˚ʚ Smile :) ɞ˚‧｡⋆"
-          : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."}
+          ? "⋆｡‧˚ Smile :D ˚‧｡⋆"
+          : ". ݁₊ ⊹ . Let’s decorate  ⊹ ₊ ݁."}
       </h1>
     </div>
   );

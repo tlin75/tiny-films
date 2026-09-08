@@ -390,7 +390,7 @@ function PhotoBooth({ mode, setMode }) {
               />
             ) : (
               <div className={styles.row}>
-                <div>
+                <div className={styles.controlsCol}>
                   {mode === "photo" && (
                     <PhotoCapture
                       webcamRef={webcamRef}

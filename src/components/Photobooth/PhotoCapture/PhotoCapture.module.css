@@ -1,8 +1,11 @@
 .webcamStage {
   position: relative;
   width: 100%;
-  max-width: 400px; /* keep a sensible upper bound, just not vw-based */
+  aspect-ratio: 881 / 493;
   margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-sizing: border-box;
 }
 
 .webcam {
@@ -11,6 +14,24 @@
   object-fit: cover;
   border-radius: 12px;
   display: block;
+}
+
+.cameraPlaceholder {
+  width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 400 / 223;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fffaf2;
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #2a68b2;
+  font-family: Fredoka, sans-serif;
+  border: 2px dashed #2a68b2;
 }
 
 .countdownOverlay {
@@ -26,33 +47,16 @@
   background: rgba(0, 0, 0, 0.25);
   border-radius: 12px;
   pointer-events: none;
+  font-family: Fredoka, sans-serif;
 }
 
 .buttonRow {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   margin-top: 16px;
   gap: 12px;
-}
-
-.cameraPlaceholder {
-  width: min(90vw, 400px);
-  /* keeps the same proportions at any width instead of a fixed height */
-  margin: 0 auto;
-  aspect-ratio: 400 / 223;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #fffaf2;
-  border-radius: 12px;
-  padding: 16px;
-  box-sizing: border-box;
-  color: #2a68b2;
-  font-family: Fredoka, sans-serif;
-  border: 2px dashed #2a68b2;
+  width: 100%;
 }
 
 .cameraPlaceholder p {

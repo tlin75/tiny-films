@@ -13,6 +13,15 @@
   gap: 20px;
 }
 
+.controlsCol {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: min(75vh, 800px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .headerBar {
   position: relative;
   display: flex;
@@ -39,14 +48,6 @@
   box-sizing: border-box;
 }
 
-.row {
-  display: flex;
-  gap: clamp(16px, 4vw, 40px);
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-}
-
 .backBtn {
   font-family: "Fredoka";
   padding: 6px 14px;
@@ -68,10 +69,27 @@
   grid-column: 2;
 }
 
-/* mobile responsiveness */
-@media (max-width: 500px) {
+.row {
+  display: flex;
+  gap: clamp(16px, 4vw, 40px);
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 645px) {
   .row {
     flex-direction: column;
     align-items: center;
+  }
+
+  .controlsCol {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .mainContent {
+    margin-top: 12px;
   }
 }

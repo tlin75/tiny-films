@@ -73,7 +73,7 @@
   gap: clamp(8px, 2vw, 12px);
   width: 100%;
   box-sizing: border-box;
-  padding: clamp(10px, 2.5vw, 15px) clamp(15px, 4vw, 20px);
+  padding: clamp(5px, 2vw, 10px) clamp(10px, 3.5vw, 15px);
   background-color: #fffaf2;
 }
 
@@ -83,20 +83,26 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: safe center;
   overflow: auto;
   background-color: #aee1fe;
   padding: 20px 0; /* optional: breathing room at top/bottom since it's no longer centered */
 }
 
 .logoPic {
-  width: 0px;
+  width: clamp(28px, 6vw, 40px);
+  background: #aee1fe;
+  margin: 0;
+  padding: 0;
 }
 
 .logoName {
   font-family: "Magnifico";
   color: #2a68b2;
   margin: 0;
+  padding: 0;
+  line-height: 0;
   font-size: clamp(1.1rem, 3.5vw, 1.7rem);
   font-style: oblique;
+  transform: translateY(3px);
 }

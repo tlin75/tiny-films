@@ -43,7 +43,7 @@ html {
   background-color: #fffaf2;
   width: min(90vw, 1000px);
   box-sizing: border-box;
-  height: 60vh;
+  height: min(60vh, 500px);
   align-items: center;
 }
 

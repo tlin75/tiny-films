@@ -1,4 +1,3 @@
-import btnStyles from "../Buttons.module.css";
 import styles from "./PhotoCanvas.module.css";
 
 function PhotoCanvas({
