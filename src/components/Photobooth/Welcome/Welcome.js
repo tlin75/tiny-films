@@ -7,7 +7,7 @@ function Welcome({ onGetStarted }) {
     <div className={styles.wrap}>
       <h1 className={styles.title}>₊‧꒰ა ☆ Photo Booth ☆ ໒꒱‧₊</h1>
       <p className={styles.subtitle}>
-        ˖°✧ Capture Your Magical Memories ✧˖°
+        ˖°✧ Capture Your Moments And Memories ✧˖°
       </p>
 
       <button className={`${btnStyles.btn} ${btnStyles.startBtn}`} onClick={onGetStarted}>

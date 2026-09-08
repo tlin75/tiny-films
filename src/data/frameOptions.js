@@ -14,11 +14,11 @@ export const frameOptions = [
   "/assets/frames/purple-dessert.png",
   "/assets/frames/purple-metallic.png",
   // light azure theme
-  "/assets/frames/azure-light-frame.png",
-  "/assets/frames/azure-light-waves.png",
-  "/assets/frames/azure-light-duck.png",
-  "/assets/frames/azure-light-beach.png",
-  "/assets/frames/azure-light-koi-fish.png",
+  "/assets/frames/light-azure-frame.png",
+  "/assets/frames/light-azure-waves.png",
+  "/assets/frames/light-azure-duck.png",
+  "/assets/frames/light-azure-beach.png",
+  "/assets/frames/light-azure-koi-fish.png",
   // blue theme
   "/assets/frames/blue-frame.png",
   "/assets/frames/blue-waves.png",

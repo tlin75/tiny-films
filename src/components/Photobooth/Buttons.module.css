@@ -1,8 +1,8 @@
 .btn {
-  padding: 0 16px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 20px;
+  padding: 0 14px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 15px;
   font-family: Fredoka, sans-serif;
   color: #2a68b2;
   border: 2px solid #2a68b2;
@@ -12,6 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -21,8 +22,8 @@
 }
 
 .redoBtn {
-  font-size: 22px;
-  padding: 0 10px;
+  font-size: clamp(15px, 3.8vw, 22px);
+  padding: 0 clamp(6px, 2vw, 10px);
 }
 
 .startBtn {
@@ -34,4 +35,20 @@
 .startBtn:hover {
   box-shadow: 0px -0px 0px rgba(0, 0, 0, 1);
   border-color: #2a68b2;
+}
+
+/* mobile responsiveness */
+
+@media (max-width: 850px) {
+  .btn {
+    font-size: clamp(10px, 2.3vw, 14px);
+    padding: 0 clamp(5px, 2.3vw, 12px);
+    height: clamp(25px, 6vw, 36px);
+    line-height: clamp(20px, 6vw, 36px);
+  }
+
+  .redoBtn {
+    font-size: clamp(14px, 3.8vw, 18px);
+    padding: 0 clamp(6px, 2vw, 8px);
+  }
 }
