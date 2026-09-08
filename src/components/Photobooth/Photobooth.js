@@ -354,9 +354,16 @@ function PhotoBooth({ mode, setMode }) {
   // redraw without the selection outline
   drawCanvas(false);
 
+  // get current date and format it as DD-MM-YY
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const year = String(today.getFullYear()).slice(-2);
+  const dateStr = `${day}-${month}-${year}`;
+
   const a = document.createElement("a");
   a.href = canvasRef.current.toDataURL("image/png");
-  a.download = "tiny-films.png";
+  a.download = `tiny-films-${dateStr}.png`;
   a.click();
 
   // restore the normal view (with outline, if something is still selected)
@@ -398,19 +405,19 @@ function PhotoBooth({ mode, setMode }) {
                   )}
                   {mode === "decorate" && (
                     <StickerPicker
+                      mode={mode}
                       stickerOptions={stickerOptions}
                       onAddSticker={addSticker}
+                      onDownload={downloadPhoto}
                     />
                   )}
                 </div>
 
                 <PhotoCanvas
                   canvasRef={canvasRef}
-                  mode={mode}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
-                  onDownload={downloadPhoto}
                 />
               </div>
             )}

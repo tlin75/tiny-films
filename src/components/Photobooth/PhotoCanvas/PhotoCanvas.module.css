@@ -8,12 +8,6 @@
   background-color: #fffaf2;
 }
 
-.downloadWrap {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-}
-
 /* mobile responsiveness */
 @media (max-width: 500px) {
   .canvas {

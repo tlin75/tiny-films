@@ -7,15 +7,13 @@ function Header({ selectedFrame, mode, onBack }) {
       <button className={`${btnStyles.btn} ${styles.backBtn}`} onClick={onBack}>
         &larr; Back
       </button>
-      <div className={styles.headerBar}>
-        <h1 className={styles.titleBar}>
-          {!selectedFrame
-            ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
-            : mode === "photo"
-            ? "⋆｡‧˚ʚ Smile :) ɞ˚‧｡⋆"
-            : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."}
-        </h1>
-      </div>
+      <h1 className={styles.titleBar}>
+        {!selectedFrame
+          ? "₊✩‧₊˚ Select a frame ౨ৎ ˚₊✩‧₊"
+          : mode === "photo"
+          ? "⋆｡‧˚ʚ Smile :) ɞ˚‧｡⋆"
+          : ". ݁₊ ⊹ . ݁Let’s decorate . ⊹ ₊ ݁."}
+      </h1>
     </div>
   );
 }

@@ -59,7 +59,7 @@
 .titleBar {
   font-family: "Fredoka";
   color: #2a68b2;
-  font-size: clamp(20px, 3.5vw, 40px);
+  font-size: clamp(20px, 3.5vw, 38px);
   margin: 0;
   padding: 0;
   background-color: #ceedfe;

@@ -1,8 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  height: min(75vh, 800px);
+  box-sizing: border-box;
+}
+
 .wrap {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-  gap: 8px;
-  width: 28vw;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(30px, 12vw, 50px), 1fr));
+  gap: clamp(4px, 1.5vw, 8px);
+  width: 100%;
+  border-radius: 10px;
+  padding: 7px;
+  background: #ceedfe;
+  box-sizing: border-box;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  align-content: start;
 }
 
 .sticker {
@@ -15,4 +34,11 @@
 
 .sticker:hover {
   transform: scale(1.1);
+}
+
+.downloadWrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0;
 }
