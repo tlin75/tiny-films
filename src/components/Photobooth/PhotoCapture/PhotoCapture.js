@@ -12,9 +12,13 @@ function PhotoCapture({
   onCapture,
   onUpload,
   onRedo,
+  filterOptions,
+  selectedFilter,
+  onSelectFilter
 }) {
   const [cameraError, setCameraError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const activeFilter = filterOptions.find((f) => f.id === selectedFilter);
 
   return (
     <div>
@@ -47,7 +51,10 @@ function PhotoCapture({
                 setCameraError(true);
                 setIsLoading(false);
               }}
-              style={{ visibility: isLoading ? "hidden" : "visible" }}
+              style={{
+                visibility: isLoading ? "hidden" : "visible",
+                filter: activeFilter.css,
+              }}
             />
           </>
         )}
@@ -56,6 +63,26 @@ function PhotoCapture({
           <div className={styles.countdownOverlay}>{countdown}</div>
         )}
       </div>
+
+      {!cameraError && (
+        <div className={styles.filterRow}>
+          {filterOptions.map((cameraFilter) => (
+            <button
+              key={cameraFilter.id}
+              className={`${styles.filterThumb} ${
+                selectedFilter === cameraFilter.id ? styles.filterSelected : ""
+              }`}
+              onClick={() => onSelectFilter(cameraFilter.id)}
+            >
+              <span
+                className={styles.filterPreview}
+                style={{ filter: cameraFilter.css }}
+              />
+              <span className={styles.filterLabel}>{cameraFilter.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className={styles.buttonRow}>
         {canTakePhoto && (

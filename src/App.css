@@ -98,13 +98,3 @@
   object-fit: contain;
 }
 
-.logoName {
-  font-family: "Magnifico";
-  color: #2a68b2;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-  font-size: clamp(1.1rem, 3.5vw, 1.7rem);
-  font-style: oblique;
-  transform: translateY(3px);
-}
