@@ -161,15 +161,22 @@ function PhotoBooth({ mode, setMode }) {
     const video = webcamRef.current?.video;
     if (!video) return;
 
-    const activeFilter = filterOptions.find((f) => f.id === selectedFilter);
+    // Find the active filter, default to null if "none" is selected
+    const activeFilter = selectedFilter !== "none" 
+      ? filterOptions.find((f) => f.id === selectedFilter) 
+      : null;
 
     const tempCanvas = document.createElement("canvas");
     tempCanvas.width = video.videoWidth;
     tempCanvas.height = video.videoHeight;
     const ctx = tempCanvas.getContext("2d");
 
-    ctx.filter = activeFilter.css;
+    // Apply filter only if one is selected (not "none")
+    if (activeFilter && activeFilter.css) {
+      ctx.filter = activeFilter.css;
+    }
 
+    // Mirror the image (since webcam is mirrored)
     ctx.translate(tempCanvas.width, 0);
     ctx.scale(-1, 1);
     ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
