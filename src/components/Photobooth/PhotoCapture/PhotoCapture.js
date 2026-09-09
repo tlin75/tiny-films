@@ -14,6 +14,7 @@ function PhotoCapture({
   onRedo,
 }) {
   const [cameraError, setCameraError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div>
@@ -27,15 +28,28 @@ function PhotoCapture({
             </p>
           </div>
         ) : (
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/png"
-            videoConstraints={videoConstraints}
-            mirrored
-            className={styles.webcam}
-            onUserMediaError={() => setCameraError(true)}
-          />
+          <>
+            { isLoading && (
+              <div className={styles.loadingPlaceholder}>
+                <div className={styles.spinner} />
+                <p>Starting camera…</p>
+              </div>
+            )}
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/png"
+              videoConstraints={videoConstraints}
+              mirrored
+              className={styles.webcam}
+              onUserMedia={() => setIsLoading(false)}
+              onUserMediaError={() => {
+                setCameraError(true);
+                setIsLoading(false);
+              }}
+              style={{ visibility: isLoading ? "hidden" : "visible" }}
+            />
+          </>
         )}
 
         {countdown != null && (
