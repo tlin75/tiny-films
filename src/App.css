@@ -59,11 +59,13 @@
 }
 
 .app {
-  height: 100dvh;      /* dvh handles mobile browser chrome better than vh */
+  /* to handle mobile browser chrome */
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;     /* prevent the page itself from scrolling */
+  /* prevent page from scrolling */
+  overflow: hidden;
 }
 
 .appHeader {
@@ -86,14 +88,14 @@
   align-items: safe center;
   overflow: auto;
   background-color: #aee1fe;
-  padding: 20px 0; /* optional: breathing room at top/bottom since it's no longer centered */
+  padding: 20px 0;
 }
 
 .logoPic {
-  width: clamp(28px, 6vw, 40px);
-  background: #aee1fe;
+  height: clamp(28px, 3.5vw, 40px);
   margin: 0;
-  padding: 0;
+  padding: clamp(3px, 0.5vw, 10px);
+  object-fit: contain;
 }
 
 .logoName {
