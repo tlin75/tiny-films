@@ -12,8 +12,13 @@ function PhotoCapture({
   onCapture,
   onUpload,
   onRedo,
+  filterOptions,
+  selectedFilter,
+  onSelectFilter
 }) {
   const [cameraError, setCameraError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const activeFilter = filterOptions.find((f) => f.id === selectedFilter);
 
   return (
     <div>
@@ -27,21 +32,57 @@ function PhotoCapture({
             </p>
           </div>
         ) : (
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/png"
-            videoConstraints={videoConstraints}
-            mirrored
-            className={styles.webcam}
-            onUserMediaError={() => setCameraError(true)}
-          />
+          <>
+            { isLoading && (
+              <div className={styles.loadingPlaceholder}>
+                <div className={styles.spinner} />
+                <p>Starting camera…</p>
+              </div>
+            )}
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/png"
+              videoConstraints={videoConstraints}
+              mirrored
+              className={styles.webcam}
+              onUserMedia={() => setIsLoading(false)}
+              onUserMediaError={() => {
+                setCameraError(true);
+                setIsLoading(false);
+              }}
+              style={{
+                visibility: isLoading ? "hidden" : "visible",
+                filter: activeFilter.css,
+              }}
+            />
+          </>
         )}
 
         {countdown != null && (
           <div className={styles.countdownOverlay}>{countdown}</div>
         )}
       </div>
+
+      {!cameraError && (
+        <div className={styles.filterRow}>
+          {filterOptions.map((cameraFilter) => (
+            <button
+              key={cameraFilter.id}
+              className={`${styles.filterThumb} ${
+                selectedFilter === cameraFilter.id ? styles.filterSelected : ""
+              }`}
+              onClick={() => onSelectFilter(cameraFilter.id)}
+            >
+              <span
+                className={styles.filterPreview}
+                style={{ filter: cameraFilter.css }}
+              />
+              <span className={styles.filterLabel}>{cameraFilter.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className={styles.buttonRow}>
         {canTakePhoto && (

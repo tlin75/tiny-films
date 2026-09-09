@@ -13,13 +13,13 @@
   gap: 20px;
 }
 
-.headerAll {
-  position: relative;
+.controlsCol {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: min(75vh, 800px);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: min(90vw, 800px);
-  margin: 0 auto;
 }
 
 .headerBar {
@@ -29,38 +29,67 @@
   justify-content: center;
 }
 
+.headerAll {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: min(80vw, 900px);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.mainContent {
+  width: min(80vw, 900px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 .backBtn {
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 12px;
   font-family: "Fredoka";
   padding: 6px 14px;
   font-size: 0.9rem;
   white-space: nowrap;
+  justify-self: start;
+  grid-column: 1;
 }
 
 .titleBar {
   font-family: "Fredoka";
   color: #2a68b2;
-  font-size: clamp(24px, 4vw, 40px);
+  font-size: clamp(20px, 3.5vw, 38px);
   margin: 0;
   padding: 0;
-  background-color: #fffaf2;
-  width: min(80vw, 700px);
+  background-color: #ceedfe;
+  width: 100%;
   text-align: center;
-}
-
-.mainContent {
-  width: 90vw;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  grid-column: 2;
 }
 
 .row {
   display: flex;
-  gap: 40px;
+  gap: clamp(16px, 4vw, 40px);
   align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 795px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .controlsCol {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .mainContent {
+    margin-top: 12px;
+  }
 }

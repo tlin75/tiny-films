@@ -1,13 +1,10 @@
-import btnStyles from "../Buttons.module.css";
 import styles from "./PhotoCanvas.module.css";
 
 function PhotoCanvas({
   canvasRef,
-  mode,
   onMouseDown,
   onMouseMove,
-  onMouseUp,
-  onDownload
+  onMouseUp
 }) {
   return (
     <div>
@@ -18,14 +15,6 @@ function PhotoCanvas({
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
       />
-
-      {mode === "decorate" && (
-        <div className={styles.downloadWrap}>
-          <button className={btnStyles.btn} onClick={onDownload}>
-            Download
-          </button>
-        </div>
-      )}
     </div>
   )
 }

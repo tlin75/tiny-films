@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Nunito";
-  src: url("../../../../public/assets/fonts/Magnifico\ Daytime\ ITC\ Std\ Regular.otf") format("truetype");
+  font-family: "Magnifico";
+  src: url("../../../../public/assets/fonts/Magnifico\ Daytime\ ITC\ Std\ Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -12,14 +12,20 @@
   font-style: normal;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2vh, 24px);
+}
+
 .wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 2vh, 24px);
   text-align: center;
-  padding: clamp(12px, 3vh, 40px) 20px;
+  padding: 0 clamp(12px, 4vw, 20px);
   height: 100%;
   box-sizing: border-box;
 }
@@ -27,17 +33,17 @@
 .title {
   font-family: "Magnifico";
   color: #2a68b2;
-  font-size: clamp(24px, 4vw, 40px);
+  font-size: clamp(20px, 5vw, 35px);
   margin: 0;
-  padding: 0;
-  background-color: #fffaf2;
-  width: min(80vw, 700px);
+  background-color: #aee1fe;
+  width: min(85vw, 700px);
+  box-sizing: border-box;
 }
 
 .subtitle {
   font-family: "Nunito";
   color: #2a68b2;
-  font-size: clamp(18px, 1.5vw, 30px);
+  font-size: clamp(13px, 3.2vw, 22px);
   margin: 0;
   opacity: 0.85;
   font-style: italic;
@@ -47,27 +53,29 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: clamp(16px, 3vw, 45px);
-  margin: 12px 0 0;
+  gap: clamp(10px, 3vw, 45px);
   align-items: flex-start;
   border: 2px dashed #2a68b2;
   border-radius: 12px;
-  width: min(80vw, 690px);
-  padding: 15px;
-  box-shadow: 15px -15px 8px rgba(232, 246, 255, 1);
+  width: min(90vw, 690px);
+  padding-top: 15px;
+  margin-top: 10px;
+  box-shadow: 10px -10px 8px rgba(232, 246, 255, 1);
   background-color: #fffaf2;
   box-sizing: border-box;
+  max-height: 55vh;
+  overflow-y: auto;
 }
 
 .previewCol {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: clamp(4px, 1.5vw, 12px);
 }
 
 .previewImg {
-  width: clamp(70px, 10vw, 120px);
+  width: clamp(50px, 10vw, 100px);
   border-radius: 10px;
   box-shadow: 3px 4px 4px rgba(174, 225, 254, 0.5);
   transition: transform 0.25s ease;
@@ -84,73 +92,17 @@
   gap: 6px;
   font-family: Fredoka, sans-serif;
   color: #2a68b2;
-  font-size: 0.9rem;
+  font-size: clamp(0.65rem, 2.2vw, 0.9rem);
 }
 
 .stepNum {
-  width: 32px;
-  height: 32px;
+  width: clamp(22px, 5vw, 32px);
+  height: clamp(22px, 5vw, 32px);
   border-radius: 50%;
   background: #aadbf6;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-}
-
-/* mobile responsiveness */
-@media (max-width: 512px) {
-  .wrap {
-    justify-content: flex-start;
-    padding: 16px;
-    gap: 16px;
-  }
-
-  .title {
-    font-size: 4vw;
-  }
-
-  .subtitle {
-    font-size: 13px;
-  }
-
-  .previewSteps {
-    flex-direction: row;
-    width: 100%;
-    gap: 10px;
-    padding: 15px;
-  }
-
-}
-
-@media (max-width: 600px) {
-  .previewSteps {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    max-height: 45vh;
-    overflow-y: auto;
-    gap: 10vw;
-    padding: 10px;
-    box-shadow: 8px -8px 6px rgba(232, 246, 255, 1);
-  }
-
-  .previewImg {
-    width: 60px;
-    justify-self: center;
-  }
-
-  .step {
-    flex-direction: column; 
-    align-items: center;
-    width: 60px;
-    text-align: center;
-    gap: 6px;
-    font-size: 0.72rem;
-  }
-
-  .stepNum {
-    width: 24px;
-    height: 24px;
-    font-size: 0.75rem;
-  }
+  font-size: clamp(0.65rem, 2vw, 0.9rem);
 }

@@ -59,21 +59,23 @@
 }
 
 .app {
-  height: 100dvh;      /* dvh handles mobile browser chrome better than vh */
+  /* to handle mobile browser chrome */
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow: hidden;     /* prevent the page itself from scrolling */
+  /* prevent page from scrolling */
+  overflow: hidden;
 }
 
 .appHeader {
-  flex-shrink: 0;       /* header keeps its natural height */
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: clamp(8px, 2vw, 12px);
   width: 100%;
   box-sizing: border-box;
-  padding: 15px 20px;
+  padding: clamp(5px, 2vw, 10px) clamp(10px, 3.5vw, 15px);
   background-color: #fffaf2;
 }
 
@@ -83,39 +85,16 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
   overflow: auto;
   background-color: #aee1fe;
+  padding: 20px 0;
 }
 
 .logoPic {
-  width: 0px;
-}
-
-.logoName {
-  font-family: "Magnifico";
-  color: #2a68b2;
+  height: clamp(28px, 3.5vw, 40px);
   margin: 0;
-  font-size: 1.7rem;
-  font-style: oblique;
+  padding: clamp(3px, 0.5vw, 10px);
+  object-fit: contain;
 }
 
-/* mobile reponsiveness */
-@media (max-width: 600px) {
-  .appContent {
-    padding: 10px 0;
-  }
-
-  .appHeader {
-    padding: 10px 15px;
-    gap: 8px;
-  }
-
-  .logoPic {
-    width: 0px;
-  }
-
-  .logoName {
-    font-size: 1.2rem;
-  }
-}

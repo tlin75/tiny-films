@@ -1,13 +1,10 @@
 .canvas {
-  width: 200px;
-  height: 500px;
+  flex: 0 0 auto;
+  width: auto;
+  height: min(75vh, 800px);
+  display: block;
+  margin: 0 auto;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  background-color: #ffffff;
-}
-
-.downloadWrap {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
+  background-color: #fffaf2;
 }

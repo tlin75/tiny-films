@@ -9,6 +9,7 @@ import StickerPicker from "./StickerPicker/StickerPicker";
 import PhotoCanvas from "./PhotoCanvas/PhotoCanvas";
 import { frameOptions } from "../../data/frameOptions";
 import { stickerOptions } from "../../data/stickerOptions";
+import { filterOptions } from '../../data/filterOptions';
 
 const videoConstraints = {
   width: 881,
@@ -32,7 +33,8 @@ function PhotoBooth({ mode, setMode }) {
   ], []);
 
   const [selectedFrame, setSelectedFrame] = useState(null);
-  
+  const [selectedFilter, setSelectedFilter] = useState("none");
+
   // Welcome screen "Get Started" button:
   const handleGetStarted = () => setMode("frame");
 
@@ -156,8 +158,23 @@ function PhotoBooth({ mode, setMode }) {
   };
 
   const takePhotoNow = () => {
-    const src = webcamRef.current.getScreenshot();
-    if (!src) return;
+    const video = webcamRef.current?.video;
+    if (!video) return;
+
+    const activeFilter = filterOptions.find((f) => f.id === selectedFilter);
+
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = video.videoWidth;
+    tempCanvas.height = video.videoHeight;
+    const ctx = tempCanvas.getContext("2d");
+
+    ctx.filter = activeFilter.css;
+
+    ctx.translate(tempCanvas.width, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+    const src = tempCanvas.toDataURL("image/png");
     const img = new Image();
     img.src = src;
     img.onload = () => addPhoto(img);
@@ -345,17 +362,25 @@ function PhotoBooth({ mode, setMode }) {
       setPhotos([]);
       setPhotoCount(0);
       setMode("frame");
+    } else if (mode === "frame") {
+      setMode("welcome");
     }
-    // no back button needed from "frame" or "welcome"
-  };
+};
 
   const downloadPhoto = () => {
   // redraw without the selection outline
   drawCanvas(false);
 
+  // get current date and format it as DD-MM-YY
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const year = String(today.getFullYear()).slice(-2);
+  const dateStr = `${day}-${month}-${year}`;
+
   const a = document.createElement("a");
   a.href = canvasRef.current.toDataURL("image/png");
-  a.download = "tiny-films.png";
+  a.download = `tiny-films-${dateStr}.png`;
   a.click();
 
   // restore the normal view (with outline, if something is still selected)
@@ -382,7 +407,7 @@ function PhotoBooth({ mode, setMode }) {
               />
             ) : (
               <div className={styles.row}>
-                <div>
+                <div className={styles.controlsCol}>
                   {mode === "photo" && (
                     <PhotoCapture
                       webcamRef={webcamRef}
@@ -393,23 +418,26 @@ function PhotoBooth({ mode, setMode }) {
                       onCapture={capturePhoto}
                       onUpload={uploadPhoto}
                       onRedo={redoLastPhoto}
+                      filterOptions={filterOptions}
+                      selectedFilter={selectedFilter}
+                      onSelectFilter={setSelectedFilter}
                     />
                   )}
                   {mode === "decorate" && (
                     <StickerPicker
+                      mode={mode}
                       stickerOptions={stickerOptions}
                       onAddSticker={addSticker}
+                      onDownload={downloadPhoto}
                     />
                   )}
                 </div>
 
                 <PhotoCanvas
                   canvasRef={canvasRef}
-                  mode={mode}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
-                  onDownload={downloadPhoto}
                 />
               </div>
             )}
