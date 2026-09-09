@@ -2,70 +2,34 @@
 
 A browser-based photobooth app where user can pick a film-strip frame, capture or upload photos, then decorate their strip with stickers. Everything is composited live on an HTML5 canvas so you get a downloadable, shareable film strip.
 
-![TinyFilms Photobooth Usage](public/assets/other/photobooth-main-usage.png)
+<img src="public/assets/other/photobooth-main-usage.png" alt="TinyFilms Photobooth Usage" width="50%">
 
 ## Features
 
-- Live webcam capture with a 3-second countdown, or upload your own photos
-- Frame selection: Choose from a variety of pastel/aesthetic film-strip frames
-- Drag-and-drop editing: position photos within their slots after capture
-- Sticker decoration mode: add, drag, select and delete stickers on your strip
-- Keyboard support: delete a selected sticker using `Backspace`/`Delete` keys
-- Redo: remove the last photo and recapture if you're not happy with it
+- Welcome screen with a preview of sample frames and a step-by-step guide
+- Frame Selection: browse frames by color theme in a scrollable carousel
+- Photo Capture: live webcam capture with a 3-second countdown, or upload your own photos
+    - Camera filters: apply a live camera filter (e.g. B&W, vintage etc) for photo capture
+    - Redo — remove the last photo and recapture if you're not happy with it
+    - Drag-and-drop editing: position photos within their slots after capture
+- Sticker Decoration:
+    - Add, drag, select and delete stickers on your film strip
+    - Keyboard support: delete a selected sticker using Backspace/Delete
+    - Date-stamped download: final film strip's filename automatically dated too
+- Fully responsive: usable across desktop, tablet, and mobile including a stacked layout and scrollable controls on smaller screens
+- Loading and permission states: a spinner while the camera connects and a clear fallback message (with upload option) if camera access is denied
 
 ## Tech Stack
 
 - Frontend: React, HTML, CSS
-
-## Project Structure
-
-```
-src/
-├── components/
-│   └── Photobooth/
-│       ├── Photobooth.js 
-│       ├── Header.js          
-│       ├── FrameSelector/
-│       ├── PhotoCapture/   
-│       ├── PhotoCanvas/ 
-│       └── StickerPicker/ 
-├── data/
-│   ├── frameOptions.js  
-│   └── stickerOptions.js  
-└── styles/
-    └── global.css
-
-public/
-└── assets/
-    ├── frames/      
-    ├── stickers/    
-    └── fonts/        
-```
+- Camera access: react-webcam
+- Image compositing: HTML5 Canvas API
 
 ## Getting Started
 
-### Prerequisites
+Currently, the app runs at `https://tiny-films.vercel.app`.
 
-- [Node.js](https://nodejs.org/) (v16 or later recommended)
-- npm or yarn
-
-### Installation
-
-```bash
-# Clone the repo
-git clone https://github.com/tlin75/tiny-film.git
-cd tiny-film
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm start
-```
-
-Currently, the app runs at `http://localhost:3000`.
-
-> **Note:** Your browser will ask for camera permission on first use — this is required for the webcam capture feature to work.
+> **Note:** Your browser will ask for camera permission on first use (this is required for the webcam capture feature to work).
 
 ## Usage
 
@@ -77,9 +41,9 @@ Currently, the app runs at `http://localhost:3000`.
 6. Use the **Back** button to return to the previous step at any time.
 
 ## Further Implementation
-- [ ] Add more filters/effects to captured photos
+- [ ] Save to history (view and revisit past film strips)
 - [ ] Sticker resizing via drag handles
-- [ ] Mobile responsiveness + touch support for dragging photos/stickers
+- [ ] Touch support for dragging photos/stickers on mobile
 
 ## Credits
 Designed in Figma and Canva using 
