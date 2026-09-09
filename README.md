@@ -10,7 +10,7 @@ A browser-based photobooth app where user can pick a film-strip frame, capture o
 - Frame Selection: browse frames by color theme in a scrollable carousel
 - Photo Capture: live webcam capture with a 3-second countdown, or upload your own photos
     - Camera filters: apply a live camera filter (e.g. B&W, vintage etc) for photo capture
-    - Redo — remove the last photo and recapture if you're not happy with it
+    - Redo: remove the last photo and recapture if you're not happy with it
     - Drag-and-drop editing: position photos within their slots after capture
 - Sticker Decoration:
     - Add, drag, select and delete stickers on your film strip
@@ -22,14 +22,36 @@ A browser-based photobooth app where user can pick a film-strip frame, capture o
 ## Tech Stack
 
 - Frontend: React, HTML, CSS
-- Camera access: react-webcam
-- Image compositing: HTML5 Canvas API
+    - Camera access: react-webcam
+    - Image compositing: HTML5 Canvas API
 
 ## Getting Started
 
-Currently, the app runs at `https://tiny-films.vercel.app`.
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16 or later recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/tlin75/tiny-film.git
+cd tiny-film
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+```
+The app will run at `http://localhost:3000`. 
 
 > **Note:** Your browser will ask for camera permission on first use (this is required for the webcam capture feature to work).
+
+## Deployment
+
+The application is deployed and available at `https://tiny-films.vercel.app`.
 
 ## Usage
 
@@ -46,6 +68,8 @@ Currently, the app runs at `https://tiny-films.vercel.app`.
 - [ ] Touch support for dragging photos/stickers on mobile
 
 ## Credits
-Designed in Figma and Canva using 
+All film strip frames were designed by myself in Figma and Canva.
+
+### Third-Party Assets
 - Fonts: Nunito, Fredoka, Magnifico Daytime ITC.
-- Icons: Canva, Freepik.
+- Icons & Stickers: Canva, Freepik.
