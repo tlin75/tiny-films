@@ -1,4 +1,4 @@
-# TinyFilms Photobooth
+# Tiny Films Photobooth
 
 A browser-based photobooth app where user can pick a film-strip frame, capture or upload photos, then decorate their strip with stickers. Everything is composited live on an HTML5 canvas so you get a downloadable, shareable film strip.
 
@@ -53,14 +53,17 @@ The app will run at `http://localhost:3000`.
 
 The application is deployed and available at `https://tiny-films.vercel.app`.
 
+> **Note:** Your browser will ask for camera permission on first use (this is required for the webcam capture feature to work).
+
 ## Usage
 
-1. **Select a frame** from the carousel on the home screen.
-2. **Take or upload 4 photos** to fill the frame's photo slots
-3. Once all 4 slots are filled, you're moved into **decorate mode** where you pick stickers and drag them anywhere on your strip.
-4. Click a sticker to select it (shown with a pink outline), then press `Delete`/`Backspace` to remove it.
-5. Click download to get a png of your film strip.
-6. Use the **Back** button to return to the previous step at any time.
+1. Click the Get Started button on the home screen to start making your photobooth strip.
+2. **Select a frame** from the carousel on the select frame.
+3. **Take or upload 4 photos** to fill the frame's photo slots
+4. Once all 4 slots are filled, you're moved into **decorate mode** where you pick stickers and drag them anywhere on your strip.
+5. Click a sticker to select it (shown with a pink outline), then press `Delete`/`Backspace` to remove it.
+6. Click download to get a png of your film strip.
+7. Use the **Back** button to return to the previous step at any time.
 
 ## Further Implementation
 - [ ] Save to history (view and revisit past film strips)
@@ -68,7 +71,7 @@ The application is deployed and available at `https://tiny-films.vercel.app`.
 - [ ] Touch support for dragging photos/stickers on mobile
 
 ## Credits
-All film strip frames were designed by myself in Figma and Canva.
+All film strip frames were designed by myself in [Canva](https://canva.link/ax2po6pnw21ss2h) and compiled in [Figma](https://www.figma.com/design/17Q0IeQMgvi2zXSQLAV3XT/Tiny-Films?node-id=0-1&t=DpsUdLc2HmwcYuhs-1).
 
 ### Third-Party Assets
 - Fonts: Nunito, Fredoka, Magnifico Daytime ITC.
